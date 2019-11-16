@@ -7,7 +7,10 @@
 
 # RULES
 1. Noone is allowed to push directly into master. 
-2. Noone is working on the master. 
+2. Noone is working on the master.
+3. 3 Branches (Feature, Development and Master)
+  Work in Feature and push to Development once approved.
+  Confirm Development is working and Push to Master once approved.
 
 #Test Pull Request 
 
