@@ -1,50 +1,17 @@
-// import React from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Paper from '@material-ui/core/Paper';
-// import Grid from '@material-ui/core/Grid';
-// import ProvidersBoard from "./molecules/ProvidersBoard";
-// import ChangeDisplay from '../molecules/ChangeDisplayBoard';
+import React from "react";
+import ChangeLayout from "../molecules/ChangeLayout";
+import ProviderBoard from "../molecules/ProvidersBoard";
+import ClearFilter from "../atoms/ClearFilter";
 
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   paper: {
-//     padding: theme.spacing(2),
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-//   },
-//   button: {
-//     margin: theme.spacing(1),
-//   },
-//   input: {
-//     display: 'none',
-//   }
-// }));
-
-// export default function FullWidthGrid() {
-//   const classes = useStyles();
-
-//   return (
-//     <div className={classes.root}>
-//         <div>
-//             <span>Refine your Search:</span>
-//         </div>
-//       <Grid container spacing={1}>
-//         <Grid item xs={3}>
-//           <Paper className={classes.paper}><ChangeDisplay/></Paper>
-//         </Grid>
-//         <Grid item xs={6} sm={6}>
-//           <Paper className={classes.paper}>
-//               <ProvidersBoard/>
-//           </Paper>
-//         </Grid>
-//         <Grid item xs={3}>
-//           <Paper className={classes.paper}><Button variant="contained" color="primary" className={classes.button}>
-//         {/* Button name is changed id onclied is true */}
-//       </Button></Paper>
-//         </Grid>
-//       </Grid>
-//     </div>
-//   );
-// }
+export default function FilterBoard() {
+  return (
+    <div>
+      <div>
+        <span>Refine your Search:</span>
+      </div>
+      <ChangeLayout />
+      <ProviderBoard />
+      <ClearFilter />
+    </div>
+  );
+}
