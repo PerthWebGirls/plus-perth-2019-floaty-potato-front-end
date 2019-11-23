@@ -1,12 +1,11 @@
-// import React from 'react';
+import React from "react";
 
-// const AppFooter = ()=>{
-//     return (
-//         <div className="footer">
-//             <snap>All Rights reserved &copy; SheCodesPlus</snap>
+const AppFooter = () => {
+  return (
+    <div className="footer">
+      <snap>All Rights reserved &copy; SheCodesPlus</snap>
+    </div>
+  );
+};
 
-//         </div>
-//     )
-// }
-
-// export default AppFooter
+export default AppFooter;

@@ -1,14 +1,4 @@
 import React, { Component } from "react";
-// import { makeStyles } from "@material-ui/core/styles";
-// import GridList from "@material-ui/core/GridList";
-// import GridListTile from "@material-ui/core/GridListTile";
-// import GridListTileBar from "@material-ui/core/GridListTileBar";
-// import ListSubheader from "@material-ui/core/ListSubheader";
-// import IconButton from "@material-ui/core/IconButton";
-// import InfoIcon from "@material-ui/icons/Info";
-// import MovieCard from "../molecules/MovieCard";
-import TextField from "@material-ui/core/TextField";
-import { Link } from "react-router-dom";
 
 class MovieGrid extends Component {
   constructor(props) {
@@ -38,8 +28,6 @@ class MovieGrid extends Component {
     return (
       <div>
         <h1>Movie List</h1>
-        <input type={TextField} />
-        <button>Get Data</button>
         <div>
           {this.state.movies.map((movie, index) => (
             <div key={movie.title}>
@@ -67,29 +55,3 @@ class MovieGrid extends Component {
 }
 
 export default MovieGrid;
-
-{
-  /* <GridList cellHeight={180} className={classes.gridList}>
-            <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
-            <ListSubheader component="div">Movies List</ListSubheader>
-            </GridListTile
-            {this.state.movies.map(movie => (
-                <MovieCard image={movie.image} title = {movie.title} providers={movie.provider} />
-            <GridListTile key={movie.img}>
-                <img src={tile.img} alt={tile.title} />
-                <GridListTileBar
-                title={tile.title}
-                subtitle={<span>released on: {tile.realease_date}</span>}
-                actionIcon={
-                    <IconButton
-                    aria-label={`info about ${tile.title}`}
-                    className={classes.icon}
-                    >
-                    <InfoIcon />
-                    </IconButton>
-                }
-                />
-            </GridListTile>
-            ))}
-        </GridList> */
-}
