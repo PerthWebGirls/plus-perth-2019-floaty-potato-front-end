@@ -7,12 +7,12 @@ import FilterBoard from "../organisms/FilterBoard";
 import MovieGrid from "../organisms/MovieGrid";
 
 
-const MainPage = ({ movies, ...props }) => {
+const MainPage = ({ movies, onSearch, ...props }) => {
 
   return (
     <div className="App">
       <NavBar />
-      <BannerBoard />
+      <BannerBoard onSearch={onSearch}/>
       <FilterBoard />
       <MovieGrid movies={movies} nadiasProperty="something" />
       < AppFooter />
