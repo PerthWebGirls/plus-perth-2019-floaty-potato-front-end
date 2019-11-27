@@ -1,14 +1,13 @@
-import React, { Component } from "react";
-import { chunkify } from '../../utils';
+import React from "react";
 
-const MovieGrid = ({ movies, nadiasProperty }) => {
 
-  console.log('nadia prop: ', nadiasProperty)
+const MovieGrid = (props) => {
+
   return (
     <div>
       <h1>Movie List</h1>
       <div>
-        {movies.map((movie, index) => (
+        {props.movies.map((movie, index) => (
           <div key={index}>
             <ul>
               <li>{movie.title}</li>
