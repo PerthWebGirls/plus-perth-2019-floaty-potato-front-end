@@ -6,13 +6,14 @@ const ProviderItem = ({ name, uri, image, ...props }) => {
     <div className="provider">
       {/* <Link to="{url}"/> */}
       <div
-        class="cityimage"
+        className="providerImage"
         style={{
           backgroundImage: `url(/static/${name}.jpg)`,
           width: 10,
           height: 10
         }}
-      ></div>
+      >
+      </div>
     </div>
   );
 };

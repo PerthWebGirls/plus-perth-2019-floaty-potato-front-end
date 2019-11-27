@@ -7,7 +7,7 @@ export default function FilterBoard() {
   return (
     <div>
       <div>
-        <span>Refine your Search:</span>
+        <h4>Refine your Search:</h4>
       </div>
       <ChangeLayout />
       <ProviderBoard />

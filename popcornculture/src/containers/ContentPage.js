@@ -28,8 +28,8 @@
 //             <div>
 //                 <ul>
 //                     <li key={pic.results} > <img src={pic.picture.medium} /></li>
-//                     <li key={title.results}><span>{title.movieTitle}</span></li>
-//                     <li key={provider.results}><span>{provider.providers}</span></li>
+//                     <li key={title.results}>{title.movieTitle}</li>
+//                     <li key={provider.results}>{provider.providers}</li>
 //                 </ul>
 //             </div>
 //           );

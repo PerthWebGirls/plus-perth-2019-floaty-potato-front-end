@@ -10,7 +10,7 @@ class AppContainer extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     fetch("http://localhost:8000/api/movies/")
       .then(res => res.json())
       .then(data => {
