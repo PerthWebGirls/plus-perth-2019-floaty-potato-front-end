@@ -1,17 +1,14 @@
-import React from "react";
-import "./App.css";
-import MainPage from "./components/pages/MainPage";
-import NavBar from "./components/molecules/NavBar";
-import AppFooter from "./components/molecules/AppFooter";
-import BannerBoard from "./components/organisms/BannerBoard";
+import React from 'react';
+import AppContainer from './containers/AppContainer';
+import { BrowserRouter as Router } from 'react-router-dom';
+// import './style.css';
+
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <BannerBoard />
-      <MainPage />
-      <AppFooter />
-    </div>
+    <Router>
+      <AppContainer className="style" />
+    </Router>
   );
 }
+
 export default App;

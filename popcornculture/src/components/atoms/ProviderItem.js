@@ -1,14 +1,21 @@
-// import React from "react";
+import React from "react";
 // import { Link } from "react-router-dom";
 
-// const Provider = ({ name,uri, ...props }) => {
-//   return (
-//     <div className="provider">
-//       <Link to="{uri}"/>
-//       <snap>{name}</snap>
-//     </div>
-//   )
+const ProviderItem = ({ name, uri, image, ...props }) => {
+  return (
+    <div className="provider">
+      {/* <Link to="{url}"/> */}
+      <div
+        className="providerImage"
+        style={{
+          backgroundImage: `url(/static/${name}.jpg)`,
+          width: 10,
+          height: 10
+        }}
+      >
+      </div>
+    </div>
+  );
+};
 
-// };
-
-// export default Provider;
+export default ProviderItem;

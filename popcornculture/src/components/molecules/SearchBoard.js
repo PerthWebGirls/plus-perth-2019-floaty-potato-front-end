@@ -1,30 +1,41 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import TextInput from "../atoms/TextInput";
 import Button from "../atoms/Button";
 
-const SearchBoard = props => {
-  //   const [searchValue, setSearchValue] = useState("");
+class SearchBoard extends Component {
+  state = {
+    searchValue: '',
+  };
 
-  //   const handleSearchInputChanges = (e) => {
-  //     setSearchValue(e.target.value);
-  //   }
+  handleOnChange  = (event) => {
+    this.setState({searchValue : event.target.value });
+  }
 
-  //   const resetInputField = () => {
-  //     setSearchValue("")
-  //   }
+  resetInputField = () => {
+    this.setState({searchValue : ""});
+  }
 
-  //   const callSearchFunction = (e) => {
-  //     e.preventDefault();
-  //     props.search(searchValue);
-  //     resetInputField();
-  //   }
+  handleSearch = (event) => {
+    event.preventDefault();
+    this.props.onSearch(this.state.searchValue);
+    this.resetInputField();
+  }
 
-  return (
-    <div>
-      <TextInput name="Search" value="Search for movie" />
-      <Button>Search</Button>
-    </div>
-  );
+  render(){
+      return (
+        <div>
+          <form>
+            <TextInput placeholder="Search for..." value={this.state.searchValue} onChange={this.handleOnChange } />
+            <Button onButtonClick={this.handleSearch}>Search</Button>
+          </form>
+        </div >
+      );
+  }
+
 };
 
 export default SearchBoard;
+
+
+
+
