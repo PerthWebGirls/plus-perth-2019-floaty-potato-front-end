@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import MainPage from "./components/pages/MainPage";
 import NavBar from "./components/molecules/NavBar";
-import AppFooter from "./components/molecules/AppFooter";
+import Footer from "./components/organisms/Footer";
 import BannerBoard from "./components/organisms/BannerBoard";
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <NavBar />
       <BannerBoard />
       <MainPage />
-      <AppFooter />
+      <Footer />
     </div>
   );
 }
