@@ -12,9 +12,9 @@ const MainPage = ({ movies, onSearch, ...props }) => {
   return (
     <div className="App">
       <NavBar />
-      <BannerBoard onSearch={onSearch}/>
+      <BannerBoard onSearch={onSearch} />
       <FilterBoard />
-      <MovieGrid movies={movies} nadiasProperty="something" />
+      <MovieGrid movies={movies} />
       < AppFooter />
     </div>
   );
