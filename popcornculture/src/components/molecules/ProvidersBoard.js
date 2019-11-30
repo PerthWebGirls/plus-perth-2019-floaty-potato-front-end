@@ -1,21 +1,26 @@
-// import React, { Component } from "react";
-// import ProviderItem from "./atoms/ProviderItem";
+import React from "react";
+import ProviderItem from "../atoms/ProviderItem";
 // import { Link } from "react-router-dom";
 
-// const ProviderBeard = (providers, ...props) => {
-//   {
-//     return (
-//       <div>
-//         <ul>
-//           {providers.map(item => (
-//             <Link to="/${item.url}">
-//               <ProviderItem image={item.image}></ProviderItem>
-//             </Link>
-//           ))}
-//         </ul>
-//       </div>
-//     );
-//   }
-// };
+let providers = [
+  { name: "Stan", url: "" },
+  { name: "Prime Video", url: "" },
+  { name: "Netflix", url: "" },
+  { name: "Foxtel Now", url: "" },
+  { name: "Disney+", url: "" }
+];
+const ProviderBoard = (props) => {
+  {
+    return (
+      <div>
+        <ul>
+          {providers.map((item, index) => (
+            <ProviderItem key={index} name={item.name} url={item.url} />
+          ))}
+        </ul>
+      </div>
+    );
+  }
+};
 
-// export default ProviderBeard;
+export default ProviderBoard;

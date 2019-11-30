@@ -2,7 +2,7 @@ import React from "react";
 import SearchBoard from "../molecules/SearchBoard";
 import "./BannerBoard.css"
 
-const BannerBoard = () => {
+const BannerBoard = ({onSearch}) => {
   return (
     < div className="BannerBoard">
       <div
@@ -15,7 +15,7 @@ const BannerBoard = () => {
         }}
       >
         <div className="SearchBoard">
-          <SearchBoard />
+          <SearchBoard onSearch={onSearch} />
           <div className="color-divider"></div>
         </div>
       </div>
