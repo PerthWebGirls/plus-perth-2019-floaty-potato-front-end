@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import "./LoginForm.css"
 class LoginForm extends React.Component {
   state = {
     username: '',
@@ -24,23 +24,23 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <form method="POST" onSubmit={e => this.props.handle_login(e, this.state, this.on_success)}>
+      <form className = "LoginForm" method="POST" onSubmit={e => this.props.handle_login(e, this.state, this.on_success)}>
         <h4>Log In</h4>
-        <label htmlFor="username">Username</label>
-        <input
+        <label className ="Label" htmlFor="username">Username</label>
+        <input className ="Input"
           type="text"
           name="username"
           value={this.state.username}
           onChange={this.handle_change}
         />
-        <label htmlFor="password">Password</label>
-        <input
+        <label className="Label"htmlFor="password">Password</label>
+        <input className="Input"
           type="password"
           name="password"
           value={this.state.password}
           onChange={this.handle_change}
         />
-        <input type="submit" />
+        <input className ="Submit" type="submit" />
       </form>
     );
   }
