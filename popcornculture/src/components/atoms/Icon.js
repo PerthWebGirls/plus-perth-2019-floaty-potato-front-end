@@ -1,7 +1,7 @@
 import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 
-const Icon = () => {
+const Icon = ({ onIconClick, ...props }) => {
   return (
     <div>
       <FaUserAlt />

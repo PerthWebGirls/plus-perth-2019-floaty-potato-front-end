@@ -1,9 +1,9 @@
 import React from "react";
 import TextLink from "../atoms/TextLink";
 import Button from "../atoms/Button";
-import Icon from "../atoms/Icon";
+import Menu from "../molecules/Menu";
 
-const NavBar = ({ onTextLinkClick }) => {
+const NavBar = ({ onTextLinkClick, onIconClick, ...props }) => {
   return (
     <div>
       <div>
@@ -12,9 +12,7 @@ const NavBar = ({ onTextLinkClick }) => {
           PopcornCulture
         </TextLink>
       </div>
-      <div>
-        <Icon onButtonClick={onTextLinkClick} />
-      </div>
+      <Menu onIconClick={onIconClick} />
       <Button>Log in</Button>
     </div>
   );
