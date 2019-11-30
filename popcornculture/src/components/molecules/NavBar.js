@@ -3,6 +3,7 @@ import TextLink from "../atoms/TextLink";
 import Button from "../atoms/Button";
 import Menu from "../molecules/Menu";
 import Icon from "../atoms/Icon";
+import { Link } from 'react-router-dom';
 import "./NavBar.css"
 const NavBar = ({ onTextLinkClick, onIconClick, ...props }) => {
   return (
@@ -25,8 +26,8 @@ const NavBar = ({ onTextLinkClick, onIconClick, ...props }) => {
             <a href="#">Watchlist</a>
             <a href="#">Logout</a>
           </div>
-        </div>
-        <Button className="LogIn">Log in</Button>
+        </div> 
+        <Link to="/Login">Log in</Link>
       </div>
 
 
