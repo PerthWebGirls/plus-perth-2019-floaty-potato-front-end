@@ -3,9 +3,9 @@ import React from "react";
 
 const ProviderItem = ({ name, uri, image, ...props }) => {
   return (
-    <div className="provider">
+    <ul className="provider">
       {/* <Link to="{url}"/> */}
-      <div
+      <li
         className="providerImage"
         style={{
           backgroundImage: `url(/static/${name}.jpg)`,
@@ -13,8 +13,9 @@ const ProviderItem = ({ name, uri, image, ...props }) => {
           height: 10
         }}
       >
-      </div>
-    </div>
+      </li>
+      <li>{name}</li>
+    </ul>
   );
 };
 
