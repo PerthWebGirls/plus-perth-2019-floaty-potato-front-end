@@ -1,11 +1,14 @@
-import React from "react";
+import React from 'react';
+import Footertext from '../atoms/Footertext';
+import "./Footer.css"
 
 const Footer = () => {
-  return (
-    <div className="footer">
-      <p>All Rights reserved &copy; SheCodesPlus</p>
-    </div>
-  );
-};
+    return(
+        <div className="Footer">
+        {<Footertext/>}
+        </div>
+        
+    );
+}
 
 export default Footer;

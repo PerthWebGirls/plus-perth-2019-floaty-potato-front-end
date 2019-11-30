@@ -1,12 +1,12 @@
 import React from 'react';
 import AppNav from "./organisms/AppNav";
-import AppFooter from "./molecule/AppFooter";
+import Footer from "./organisms/Footer";
 
 const MainTemplate = () => {
     return(
         <div>
         <AppNav/>
-        <AppFooter/>
+        <Footer/>
         </div>
         
     );
