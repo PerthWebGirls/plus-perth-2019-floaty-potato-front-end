@@ -9,42 +9,44 @@ class AppContainer extends Component {
     super(props);
     this.state = {
       movies: [],
-      loading : true,
+      loading: true,
       errorMessage: "",
       searchValue :"",
       displayed_form:"",
       logged_in: localStorage.getItem('token') ? true : false,
       username:"",
+
     };
   }
 
-  
-  fetchApiData(){
+
+  fetchApiData() {
     fetch("http://localhost:8000/api/movies/")
-    .then(res => res.json())
-    .then(data => {
-      this.setState({ movies: data.results });
-      console.log(this.state.movies);
-    })
-    .catch(err => {
-      console.log(err);
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ movies: data.results });
+        console.log(this.state.movies);
+      })
+      .catch(err => {
+        console.log(err);
       });
-    }
-    
-  searchMovie = (searchValue) =>{  
-    this.setState({loading: true})
-    fetch(`http://localhost:8000/api/movies/?s=${searchValue}`)
-    .then(response => response.json())
-    .then(jsonResponse => {
-      this.setState({movies: jsonResponse.results });
-      this.setState({loading :false});
-      console.log('resp', jsonResponse)
-    })
-    .catch(err => {
+  }
+
+  searchMovie = (searchValue) => {
+    this.setState({ loading: true })
+    console.log(searchValue)
+    fetch(`http://localhost:8000/api/movies/?search=${searchValue}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ movies: data.results });
+        this.setState({ loading: false });
+        console.log('resp', data)
+      })
+      .catch(err => {
         console.log('error was', err.message);
-        this.setState({movies: []});
-        this.setState({errorMessage: err.message});
-        this.setState({loading :false});
+        this.setState({ movies: [] });
+        this.setState({ errorMessage: err.message });
+        this.setState({ loading: false });
       });
       
     }
@@ -101,6 +103,7 @@ class AppContainer extends Component {
     this.setState({ logged_in: false, username: '' });
   };
 
+
   componentDidMount() {
   this.fetchApiData();
   if (this.state.logged_in) {
@@ -116,7 +119,7 @@ class AppContainer extends Component {
       }
     }
 
-    
+
   render() {
     return (
       <>
@@ -127,7 +130,7 @@ class AppContainer extends Component {
                 movies={this.state.movies}
                 onSearch={this.searchMovie}
               />
-              <div style={{color: 'red'}}>{this.state.errorMessage}</div>
+              <div style={{ color: 'red' }}>{this.state.errorMessage}</div>
             </>
           );
         }}
