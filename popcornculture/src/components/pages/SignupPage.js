@@ -8,7 +8,7 @@ const SignupPage=({ movies, onSearch, ...props }) => {
 
 
     return (
-      <div className="App">
+      <div className="Page-container">
         <NavBar />
         <SignupForm handle_signup={props.handle_signup} />
         <Footer />

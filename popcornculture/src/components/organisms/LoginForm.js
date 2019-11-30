@@ -24,7 +24,7 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <form className = "LoginForm" method="POST" onSubmit={e => this.props.handle_login(e, this.state, this.on_success)}>
+      <form className="Content-Wrap" method="POST" onSubmit={e => this.props.handle_login(e, this.state, this.on_success)}>
         <h4>Log In</h4>
         <label className ="Label" htmlFor="username">Username</label>
         <input className ="Input"

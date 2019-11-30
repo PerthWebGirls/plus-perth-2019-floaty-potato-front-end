@@ -8,7 +8,7 @@ const LoginPage=({ movies, onSearch, ...props }) => {
 
 
     return (
-      <div className="App">
+      <div className="page-container">
         <NavBar />
         <LoginForm handle_login={props.handle_login} />
         <Footer />

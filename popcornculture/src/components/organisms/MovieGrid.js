@@ -1,10 +1,10 @@
 import React from "react";
-
+import "./MovieGrid.css"
 
 const MovieGrid = (props) => {
 
   return (
-    <div>
+    <div className="Content-Wrap">
       <h1>Movie List</h1>
       <div>
         {props.movies.map((movie, index) => (
