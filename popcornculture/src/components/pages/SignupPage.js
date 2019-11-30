@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../molecules/NavBar";
-import AppFooter from "../molecules/AppFooter";
+import Footer from "../organisms/Footer";
 import SignupForm from "../organisms/SignupForm";
 
 const SignupPage=({ movies, onSearch, ...props }) => {
@@ -11,7 +11,7 @@ const SignupPage=({ movies, onSearch, ...props }) => {
       <div className="App">
         <NavBar />
         <SignupForm handle_signup={props.handle_signup} />
-        <AppFooter />
+        <Footer />
 
       </div>
     );

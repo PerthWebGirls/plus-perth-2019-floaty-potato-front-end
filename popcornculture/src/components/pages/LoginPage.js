@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../molecules/NavBar";
-import AppFooter from "../molecules/AppFooter";
+import Footer from "../organisms/Footer";
 import LoginForm from "../organisms/LoginForm";
 
 const LoginPage=({ movies, onSearch, ...props }) => {
@@ -11,7 +11,7 @@ const LoginPage=({ movies, onSearch, ...props }) => {
       <div className="App">
         <NavBar />
         <LoginForm handle_login={props.handle_login} />
-        <AppFooter />
+        <Footer />
 
       </div>
     );

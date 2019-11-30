@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TextLink from "../atoms/TextLink";
 import Icon from "../atoms/Icon"
-
+import "./NavBar.css"
 
 class Menu extends Component {
   constructor() {
