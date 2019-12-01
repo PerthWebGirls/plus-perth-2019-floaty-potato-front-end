@@ -1,8 +1,9 @@
-.LoginForm{
+.Content-Wrap{
     padding-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 50px;
 }
 h4 {
     color: red;
@@ -19,3 +20,4 @@ h4 {
 .Submit {
     width: 150px;
 }
+

@@ -4,7 +4,7 @@ import Footer from "./organisms/Footer";
 
 const MainTemplate = () => {
     return(
-        <div>
+        <div >
         <AppNav/>
         <Footer/>
         </div>

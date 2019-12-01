@@ -5,12 +5,12 @@ import Footer from "../organisms/Footer";
 import BannerBoard from "../organisms/BannerBoard";
 import FilterBoard from "../organisms/FilterBoard";
 import MovieGrid from "../organisms/MovieGrid";
-
+import "./Mainpage.css"
 
 const MainPage = ({ movies, onSearch, ...props }) => {
 
   return (
-    <div className="App">
+    <div className="page-container">
       <NavBar />
       <BannerBoard onSearch={onSearch} />
       <FilterBoard />

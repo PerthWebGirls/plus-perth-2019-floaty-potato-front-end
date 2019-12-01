@@ -1,0 +1,8 @@
+.Content-Wrap{
+    display: flex;
+    padding-bottom: 50px;
+}
+
+ul{
+    list-style-type: none;
+}
