@@ -1,8 +1,49 @@
 .Content-Wrap{
-    display: flex;
     padding-bottom: 50px;
 }
+.Grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 
+}
+
+.MovieContainer{
+    color: royalblue;
+    padding: 15px;
+}
 ul{
     list-style-type: none;
+}
+
+.MovieDetails{
+    display: flex;
+    height: 150px;
+    width:150px;
+    flex-direction: column;
+    border: solid red;
+    padding: 15px;
+    flex-wrap: wrap;
+
+}
+
+.MovieTitle {
+ color: brown;
+}
+
+.MovieRelease{
+    color: brown;
+}
+
+.MovieProvider{
+    display: flex;
+    height: 30px;
+    width: 30px;
+    border: solid red;
+    flex-wrap: wrap;
+
+}
+
+.ProviderItems{
+    color: brown;
 }

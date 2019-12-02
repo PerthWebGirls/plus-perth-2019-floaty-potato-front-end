@@ -1,9 +1,12 @@
 import React from 'react'
+import "./PageTitles.css"
 
-function PageTitles() {
+export const PageTitles = (props) => {
     return (
-        <h1></h1>
+        <div ClassName ="PageTitleContainer">
+            <h1 className ="PageTitle">{props.children}</h1>
+        </div>
     )
 }
 
-export default PageTitles
+export default PageTitles;
