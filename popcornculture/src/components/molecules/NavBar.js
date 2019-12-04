@@ -4,6 +4,7 @@ import "./NavBar.css";
 import Menu from './Menu'
 import { Link } from 'react-router-dom';
 
+
 const NavBar = ({ onTextLinkClick, onIconClick, ...props }) => {
   return (
     <div className="NavBar">
@@ -18,6 +19,7 @@ const NavBar = ({ onTextLinkClick, onIconClick, ...props }) => {
 
       <div className="NavMenu">
         <Menu onIconClick={onIconClick} />
+
         <Link to="/Login">Log in</Link>
       </div>
 
