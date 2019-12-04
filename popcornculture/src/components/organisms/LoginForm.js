@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import "./LoginForm.css"
+import PageTitles from '../atoms/PageTitles';
 class LoginForm extends React.Component {
   state = {
     username: '',
@@ -25,7 +26,7 @@ class LoginForm extends React.Component {
   render() {
     return (
       <form className="Content-Wrap" method="POST" onSubmit={e => this.props.handle_login(e, this.state, this.on_success)}>
-        <h4>Log In</h4>
+        <PageTitles>Login</PageTitles>
         <label className ="Label" htmlFor="username">Username</label>
         <input className ="Input"
           type="text"

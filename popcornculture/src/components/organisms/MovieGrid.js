@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PageTitles from "../atoms/PageTitles"
 import "./MovieGrid.css"
 import { Link } from "react-router-dom";
 
@@ -6,23 +7,14 @@ class MovieGrid extends Component {
   state = {
     movieIndex: '',
   }
-
-  // handleClick(event) {
-
-  //   this.setState({ movieIndex: event.target.getAttribute('key') })
-  //   console.log("movie index", this.state.movieIndex);
-
-
-  // }
-
   render() {
     return (
       <div className="Content-Wrap"  >
-        <h1>Movie List</h1>
-        <div>
+        <PageTitles>Movie List</PageTitles>
+        <div className="Grid">
           {this.props.movies.map((movie, index) => (
-            <div key={index}>
-              <ul>
+            <div  className="MovieContainer" key={index}>
+              <ul className="MovieDetails">
                 < Link to={`/details/${index}`}>
                   <li>{movie.image}</li>
                 </Link>
@@ -33,9 +25,9 @@ class MovieGrid extends Component {
                 <li>
                   {movie.provider.map((item, index) => (
                     <div key={index}>
-                      <ul>
+                      <ul className="MovieProvider">
                         {/* <Link to={item.url}> */}
-                        <li>{item.name}</li>
+                        <li className="ProviderItems">{item.name}</li>
                         {/* </Link> */}
                       </ul>
                     </div>
