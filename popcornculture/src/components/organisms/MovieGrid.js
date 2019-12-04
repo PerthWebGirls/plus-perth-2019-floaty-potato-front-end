@@ -1,23 +1,25 @@
 import React from "react";
+import PageTitles from "../atoms/PageTitles"
 import "./MovieGrid.css"
 
 const MovieGrid = (props) => {
 
   return (
     <div className="Content-Wrap">
-      <h1>Movie List</h1>
-      <div>
+      <PageTitles>Movie List</PageTitles>
+      <div className="Grid">
         {props.movies.map((movie, index) => (
-          <div key={index}>
-            <ul>
+          <div className="MovieContainer"key={index}>
+             <ul className="MovieDetails">
               <li>{movie.title}</li>
               <li>{movie.release_date}</li>
               <li>
+          
                 {movie.provider.map((item, index) => (
                   <div key={index}>
-                    <ul>
+                    <ul className="MovieProvider">
                       {/* <Link to={item.url}> */}
-                      <li>{item.name}</li>
+                      <li className="ProviderItems">{item.name}</li>
                       {/* </Link> */}
                     </ul>
                   </div>

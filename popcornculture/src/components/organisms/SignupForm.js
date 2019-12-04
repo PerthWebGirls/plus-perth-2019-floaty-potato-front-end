@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PageTitles from '../atoms/PageTitles';
 
 class SignupForm extends React.Component {
   state = {
@@ -24,7 +25,7 @@ class SignupForm extends React.Component {
   render() {
     return (
       <form onSubmit={e => this.props.handle_signup(e, this.state)}>
-        <h4>Sign Up</h4>
+        <PageTitles>Sign Up</PageTitles>
         <label htmlFor="username">Username</label>
         <input
           type="text"
