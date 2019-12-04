@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import TextLink from "../atoms/TextLink";
-import Icon from "../atoms/Icon"
+import Icon from "../atoms/Icon";
+import "./Menu.css";
+
 
 class Menu extends Component {
   container = React.createRef();
@@ -32,13 +34,13 @@ class Menu extends Component {
         <Icon onIconClick={this.handleButtonClick} />
         {this.state.showMenu && (
           <div className="dropdown">
-            <TextLink linkType="Profile" onButtonClick={this.props.onTextLinkClick}>
+            <TextLink className="dropdown-content" linkType="Profile" onButtonClick={this.props.onTextLinkClick}>
               Profile
                 </TextLink>
-            <TextLink linkType="Watch List" onButtonClick={this.props.onTextLinkClick}>
+            <TextLink className="dropdown-content" linkType="Watch List" onButtonClick={this.props.onTextLinkClick}>
               Watch List
                 </TextLink>
-            <TextLink linkType="log out" onButtonClick={this.props.onTextLinkClick}>
+            <TextLink className="dropdown-content"linkType="log out" onButtonClick={this.props.onTextLinkClick}>
               Log out
                 </TextLink>
           </div>

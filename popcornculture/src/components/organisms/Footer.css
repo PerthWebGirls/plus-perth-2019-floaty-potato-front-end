@@ -5,8 +5,7 @@
     justify-content: center;
     background-color: red;
     height: 50px;
-
-    position:absolute;
     bottom:0;
+    position: absolute;
     
 }

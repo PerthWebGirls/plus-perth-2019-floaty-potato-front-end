@@ -1,0 +1,23 @@
+.Content-Wrap{
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+}
+h4 {
+    color: red;
+}
+.Label{
+    width: 150px;
+}
+
+.Input{
+    width: 150px;
+
+}
+
+.Submit {
+    width: 150px;
+}
+

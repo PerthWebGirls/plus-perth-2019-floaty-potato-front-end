@@ -1,8 +1,9 @@
 import React from "react";
 import TextLink from "../atoms/TextLink";
-import Button from "../atoms/Button";
 import "./NavBar.css";
 import Menu from './Menu'
+import { Link } from 'react-router-dom';
+
 
 const NavBar = ({ onTextLinkClick, onIconClick, ...props }) => {
   return (
@@ -18,8 +19,8 @@ const NavBar = ({ onTextLinkClick, onIconClick, ...props }) => {
 
       <div className="NavMenu">
         <Menu onIconClick={onIconClick} />
-        <Button className="LogIn">Log in</Button>
 
+        <Link to="/Login">Log in</Link>
       </div>
 
 
