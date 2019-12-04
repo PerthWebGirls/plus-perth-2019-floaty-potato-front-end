@@ -15,7 +15,7 @@ class MovieDetailPage extends React.Component {
         console.log(props);
         const movieIndex = props.match.params.key;
 
-        this.getMovieDetail(movieIndex);
+        this.getMovieDetail(Number(movieIndex)+1);
     }
 
 
