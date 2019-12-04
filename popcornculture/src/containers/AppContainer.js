@@ -1,20 +1,25 @@
 import React, { Component } from "react";
 import { Route } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import MainPage from "../components/pages/MainPage";
 import LoginPage from "../components/pages/LoginPage";
 import SignupPage from "../components/pages/SignupPage";
+import MovieDetailPage from "../components/pages/MovieDetailPage";
 
 class AppContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       movies: [],
+      providers: [],
+      movieIndex: "",
+      movieDetail: [],
       loading: true,
       errorMessage: "",
-      searchValue :"",
-      displayed_form:"",
+      searchValue: "",
+      displayed_form: "",
       logged_in: localStorage.getItem('token') ? true : false,
-      username:"",
+      username: "",
 
     };
   }
@@ -30,6 +35,19 @@ class AppContainer extends Component {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  getProviders() {
+    fetch("http://localhost:8000/api/providers/")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ providers: data.results })
+        console.log(this.state.providers);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
   }
 
   searchMovie = (searchValue) => {
@@ -48,9 +66,12 @@ class AppContainer extends Component {
         this.setState({ errorMessage: err.message });
         this.setState({ loading: false });
       });
-      
-    }
-  
+
+  }
+
+
+
+
   handle_login = (e, data, onSuccess) => {
     e.preventDefault();
     fetch('http://localhost:8000/api/token/', {
@@ -105,19 +126,22 @@ class AppContainer extends Component {
 
 
   componentDidMount() {
-  this.fetchApiData();
-  if (this.state.logged_in) {
-    fetch('http://localhost:8000/api/users/', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-      .then(res => res.json())
-      .then(json => {
-        this.setState({ username: json.username });
-      });
-      }
+    this.fetchApiData();
+    this.getProviders();
+
+
+    if (this.state.logged_in) {
+      fetch('http://localhost:8000/api/users/', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+        .then(res => res.json())
+        .then(json => {
+          this.setState({ username: json.username });
+        });
     }
+  }
 
 
   render() {
@@ -129,6 +153,8 @@ class AppContainer extends Component {
               <MainPage
                 movies={this.state.movies}
                 onSearch={this.searchMovie}
+                providers={this.state.providers}
+
               />
               <div style={{ color: 'red' }}>{this.state.errorMessage}</div>
             </>
@@ -141,7 +167,7 @@ class AppContainer extends Component {
             <>
               <LoginPage handle_login={this.handle_login}
               />
-              <div style={{color: 'red'}}>{this.state.errorMessage}</div>
+              <div style={{ color: 'red' }}>{this.state.errorMessage}</div>
             </>
           );
         }}
@@ -152,10 +178,13 @@ class AppContainer extends Component {
             <>
               <SignupPage handle_signup={this.handle_signup}
               />
-              <div style={{color: 'red'}}>{this.state.errorMessage}</div>
+              <div style={{ color: 'red' }}>{this.state.errorMessage}</div>
             </>
           );
         }}
+          exact
+        />
+        <Route path="/details/:key" component={MovieDetailPage}
           exact
         />
       </>
