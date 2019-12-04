@@ -10,7 +10,7 @@ const MovieGrid = (props) => {
       <div className="Grid">
         {props.movies.map((movie, index) => (
           <div className="MovieContainer"key={index}>
-             <ul>
+             <ul className="MovieDetails">
               <li>{movie.title}</li>
               <li>{movie.release_date}</li>
               <li>
