@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TextInput from "../atoms/TextInput";
 import Button from "../atoms/Button";
+import "./SearchBoard.css"
 
 class SearchBoard extends Component {
   state = {
@@ -23,10 +24,10 @@ class SearchBoard extends Component {
 
   render() {
     return (
-      <div>
+      <div >
         <form>
-          <TextInput placeholder="Search for..." value={this.state.searchValue} onChange={this.handleOnChange} />
-          <Button onButtonClick={this.handleSearch}>Search</Button>
+          <TextInput className="SearchForm" placeholder="Search for..." value={this.state.searchValue} onChange={this.handleOnChange} />
+          <Button  className="SearchForm" onButtonClick={this.handleSearch}>Search</Button>
         </form>
       </div >
     );
