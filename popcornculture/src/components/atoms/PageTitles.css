@@ -3,5 +3,8 @@ display: flex;
 }
 
 .PageTitle{
-color: slateblue;
+color: red;
+font-size: 100px;
+font-family: 'Bebas Neue', cursive;
+text-shadow: 2px 2px black;
 }
