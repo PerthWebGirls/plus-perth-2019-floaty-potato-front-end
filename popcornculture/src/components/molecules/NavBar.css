@@ -2,19 +2,19 @@
 .NavBar{
     position: fixed; /* Set the navbar to fixed position */
     width: 100%;
-
+    background-color: white;
     display: flex;
     justify-content: space-between;
-    background-color: red;
     height: 50px;
+    border-bottom: solid red;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 25px;
     
 }
 .NavLogo{
     display: flex;
     align-items: center;
-    background-color: white;
     padding: 5px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: red;
 }
 
@@ -23,7 +23,6 @@
     justify-content: flex-start;
     align-items: center;
     align-content: center;
-    background-color: white;
     color: red;
     padding-right: 30px;
 

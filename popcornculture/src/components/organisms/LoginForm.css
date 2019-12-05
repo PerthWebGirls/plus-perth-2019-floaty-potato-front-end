@@ -2,9 +2,11 @@
     padding-top: 50px;
     display: flex;
     flex-direction: column;
+    height: 100%;
     align-items: center;
     height: 100%;
     padding-bottom: 50px;
+    font-family: 'Roboto', sans-serif;
 }
 h4 {
     color: red;
