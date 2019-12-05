@@ -11,7 +11,7 @@ const NavBar = ({ onTextLinkClick, onIconClick, ...props }) => {
       <div className="NavLogo">
         <img className="Logo" src="" alt="" />
         <TextLink linkType="Popcornculture" onButtonClick={onTextLinkClick}>
-          PopcornCulture
+          Popcorn Culture
         </TextLink>
       </div>
 

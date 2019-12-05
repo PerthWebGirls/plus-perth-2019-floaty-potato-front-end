@@ -32,6 +32,7 @@ class Menu extends Component {
     return (
       <div className="container" ref={this.container}>
         <Icon onIconClick={this.handleButtonClick} />
+        
         {this.state.showMenu && (
           <div className="dropdown">
             <TextLink className="dropdown-content" linkType="Profile" onButtonClick={this.props.onTextLinkClick}>
