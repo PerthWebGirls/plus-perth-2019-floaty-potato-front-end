@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PageTitles from '../atoms/PageTitles';
-
+import "./SignupForm.css"
 class SignupForm extends React.Component {
   state = {
     username: '',
@@ -24,7 +24,7 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={e => this.props.handle_signup(e, this.state)}>
+      <form className="Content-Wrap" onSubmit={e => this.props.handle_signup(e, this.state)}>
         <PageTitles>Sign Up</PageTitles>
         <label htmlFor="username">Username</label>
         <input
@@ -40,7 +40,7 @@ class SignupForm extends React.Component {
           value={this.state.password}
           onChange={this.handle_change}
         />
-        <input type="submit" />
+        <input className="button" type="submit" />
       </form>
     );
   }
