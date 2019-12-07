@@ -1,11 +1,13 @@
 import React from 'react';
 import "./MovieDetail.css"
+import { Link } from "react-router-dom";
 const MovieDetail = ({ movieDetail, ...props }) => {
     console.log("MovieDetail_3", movieDetail);
+    console.log("provider URL", movieDetail.provider[0].url)
     return (
         < div className="Content-Wrap">
-            <div >
-                <img className="Poster" src={movieDetail.image} />
+            <div>
+                <img className="Poster" src={movieDetail.image} alt="" />
             </div>
             <div className="Detail-Wrap">
             <div>
@@ -15,9 +17,9 @@ const MovieDetail = ({ movieDetail, ...props }) => {
                 {(movieDetail.provider || []).map((item, index) => (
                     <div key={index}>
                         <ul>
-                            {/* <Link to={item.url}> */}
-                            <li>{item.name}</li>
-                            {/* </Link> */}
+                            <Link to={item.url}>
+                                <li>{item.name}</li>
+                            </Link>
                         </ul>
                     </div>
                 ))}
