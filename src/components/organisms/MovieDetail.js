@@ -1,11 +1,12 @@
 import React from 'react';
-
+import { Link } from "react-router-dom";
 const MovieDetail = ({ movieDetail, ...props }) => {
     console.log("MovieDetail_3", movieDetail);
+    console.log("provider URL", movieDetail.provider[0].url)
     return (
         <>
             <div>
-                <img src={movieDetail.image} />
+                <img src={movieDetail.image} alt="" />
             </div>
             <div>
                 <h3>{movieDetail.title}</h3>
@@ -14,9 +15,9 @@ const MovieDetail = ({ movieDetail, ...props }) => {
                 {(movieDetail.provider || []).map((item, index) => (
                     <div key={index}>
                         <ul>
-                            {/* <Link to={item.url}> */}
-                            <li>{item.name}</li>
-                            {/* </Link> */}
+                            <Link to={item.url}>
+                                <li>{item.name}</li>
+                            </Link>
                         </ul>
                     </div>
                 ))}

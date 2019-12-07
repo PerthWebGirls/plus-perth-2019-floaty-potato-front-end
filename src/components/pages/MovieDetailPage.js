@@ -4,6 +4,8 @@ import NavBar from "../molecules/NavBar"
 import Footer from "../organisms/Footer"
 import MovieDetail from "../organisms/MovieDetail"
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 class MovieDetailPage extends React.Component {
     state = { movieDetail: [] };
 
@@ -12,16 +14,18 @@ class MovieDetailPage extends React.Component {
         super(props);
 
         this.getMovieDetail = this.getMovieDetail.bind(this);
-        console.log(props);
+        console.log("props is ", props);
         const movieIndex = props.match.params.key;
-
-        this.getMovieDetail(Number(movieIndex)+1);
+        // const movieIndex = this.state.movieDetail.id;
+        this.getMovieDetail(Number(movieIndex) + 1);
+        // this.getMovieDetail(movieIndex);
     }
 
 
     getMovieDetail(movieIndex) {
         console.log("movieIndex", movieIndex)
-        return fetch(`http://localhost:8000/api/movies/${movieIndex}`)
+
+        return fetch(`${API_URL}/movies/${movieIndex}`)
             .then(response => response.json())
             .then(data => {
                 console.log("data", data);
