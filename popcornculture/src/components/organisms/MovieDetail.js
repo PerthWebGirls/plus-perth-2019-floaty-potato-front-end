@@ -1,12 +1,13 @@
 import React from 'react';
-
+import "./MovieDetail.css"
 const MovieDetail = ({ movieDetail, ...props }) => {
     console.log("MovieDetail_3", movieDetail);
     return (
-        <>
-            <div>
-                <img src={movieDetail.image} />
+        < div className="Content-Wrap">
+            <div >
+                <img className="Poster" src={movieDetail.image} />
             </div>
+            <div className="Detail-Wrap">
             <div>
                 <h3>{movieDetail.title}</h3>
             </div>
@@ -38,7 +39,8 @@ const MovieDetail = ({ movieDetail, ...props }) => {
             <div>
                 {(movieDetail.classification || {}).text}
             </div>
-        </>
+            </div>
+        </div>
     );
 
 }

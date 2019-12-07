@@ -1,0 +1,16 @@
+.Content-Wrap{
+    padding-bottom: 50px;
+    height: 100%;
+}
+
+.Poster{
+    width: 100%;
+    max-width:750px;
+}
+
+.Detail-Wrap{
+    display: flex;
+    flex-direction: column;
+    
+}
+

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import NavBar from "../molecules/NavBar"
 import Footer from "../organisms/Footer"
 import MovieDetail from "../organisms/MovieDetail"
+import "./MovieDetailPage.css"
 
 class MovieDetailPage extends React.Component {
     state = { movieDetail: [] };
