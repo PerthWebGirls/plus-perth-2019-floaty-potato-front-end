@@ -1,0 +1,13 @@
+.Footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: solid red;
+    height: 50px;
+    bottom:0;
+    position: absolute;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 25px;
+    
+}

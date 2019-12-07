@@ -1,0 +1,25 @@
+  .container{
+    width: 90px;
+
+  }
+  .dropdown {
+    position: absolute;
+    align-content: center;
+    flex-direction: column;
+    padding-top: 3px;
+
+
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    /* display: flex; */
+    background-color: white;
+    padding: 10px;
+    box-shadow: 4px 8px 16px 0px black;
+
+  }
+  
+
+
+  

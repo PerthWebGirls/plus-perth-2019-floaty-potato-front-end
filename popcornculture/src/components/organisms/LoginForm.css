@@ -1,0 +1,25 @@
+.Content-Wrap{
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding-bottom: 50px;
+    font-family: 'Roboto', sans-serif;
+}
+h4 {
+    color: red;
+}
+.Label{
+    width: 150px;
+}
+
+.Input{
+    width: 150px;
+
+}
+
+.Submit {
+    width: 150px;
+}
+

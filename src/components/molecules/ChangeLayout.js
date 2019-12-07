@@ -2,6 +2,7 @@ import React from "react";
 import ListView from "../atoms/ListView";
 import GridView from "../atoms/GridView";
 import SortBy from "../atoms/SortBy";
+import "./ChangeLayout.css"
 
 const ChangeLayout = () => {
   return (
