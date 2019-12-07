@@ -6,6 +6,8 @@ import LoginPage from "../components/pages/LoginPage";
 import SignupPage from "../components/pages/SignupPage";
 import MovieDetailPage from "../components/pages/MovieDetailPage";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 class AppContainer extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,7 @@ class AppContainer extends Component {
 
 
   fetchApiData() {
-    fetch("http://localhost:8000/api/movies/")
+    fetch("{API_URL}/api/movies/")
       .then(res => res.json())
       .then(data => {
         this.setState({ movies: data.results });
@@ -38,7 +40,7 @@ class AppContainer extends Component {
   }
 
   getProviders() {
-    fetch("http://localhost:8000/api/providers/")
+    fetch("{API_URL}/api/providers/")
       .then(response => response.json())
       .then(data => {
         this.setState({ providers: data.results })
@@ -53,7 +55,7 @@ class AppContainer extends Component {
   searchMovie = (searchValue) => {
     this.setState({ loading: true })
     console.log(searchValue)
-    fetch(`http://localhost:8000/api/movies/?search=${searchValue}`)
+    fetch(`{API_URL}/api/movies/?search=${searchValue}`)
       .then(response => response.json())
       .then(data => {
         this.setState({ movies: data.results });
@@ -74,7 +76,7 @@ class AppContainer extends Component {
 
   handle_login = (e, data, onSuccess) => {
     e.preventDefault();
-    fetch('http://localhost:8000/api/token/', {
+    fetch('{API_URL}/api/token/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -98,7 +100,7 @@ class AppContainer extends Component {
 
   handle_signup = (e, data, onSuccess) => {
     e.preventDefault();
-    fetch('http://localhost:8000/core/users/', {
+    fetch('{API_URL}/core/users/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -131,7 +133,7 @@ class AppContainer extends Component {
 
 
     if (this.state.logged_in) {
-      fetch('http://localhost:8000/api/users/', {
+      fetch('{API_URL}/api/users/', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
