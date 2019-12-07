@@ -34,17 +34,23 @@ class Menu extends Component {
         <Icon onIconClick={this.handleButtonClick} />
         
         {this.state.showMenu && (
-          <div className="dropdown">
-            <TextLink className="dropdown-content" linkType="Profile" onButtonClick={this.props.onTextLinkClick}>
+          <div className="dropdown"> 
+          <div className="dropdown-content">
+            <TextLink linkType="Profile" onButtonClick={this.props.onTextLinkClick}>
               Profile
                 </TextLink>
-            <TextLink className="dropdown-content" linkType="Watch List" onButtonClick={this.props.onTextLinkClick}>
+          </div>
+          <div className="dropdown-content">
+            <TextLink linkType="Watch List" onButtonClick={this.props.onTextLinkClick}>
               Watch List
                 </TextLink>
-            <TextLink className="dropdown-content"linkType="log out" onButtonClick={this.props.onTextLinkClick}>
+                </div>
+                <div className="dropdown-content">
+            <TextLink linkType="log out" onButtonClick={this.props.onTextLinkClick}>
               Log out
                 </TextLink>
-          </div>
+                </div>
+                </div>
         )}
       </div>
     );
