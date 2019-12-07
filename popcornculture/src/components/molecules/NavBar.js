@@ -8,12 +8,14 @@ import { Link } from 'react-router-dom';
 const NavBar = ({ onTextLinkClick, onIconClick, ...props }) => {
   return (
     <div className="NavBar">
-      <div className="NavLogo">
-        <img className="Logo" src="" alt="" />
-        <TextLink linkType="Popcornculture" onButtonClick={onTextLinkClick}>
-          Popcorn Culture
+      <Link to="/">
+        <div className="NavLogo">
+          <img className="Logo" src="" alt="" />
+          <TextLink linkType="Popcornculture" onButtonClick={onTextLinkClick}>
+            Popcorn Culture
         </TextLink>
-      </div>
+        </div>
+      </Link>
 
 
 
