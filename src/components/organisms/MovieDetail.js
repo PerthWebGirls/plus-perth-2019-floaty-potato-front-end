@@ -1,4 +1,5 @@
 import React from 'react';
+import "./MovieDetail.css"
 import { Link } from "react-router-dom";
 import Button from '../atoms/Button';
 import { withAlert } from 'react-alert'
@@ -20,10 +21,11 @@ const MovieDetail = ({ movieDetail, ...props }) => {
 
     };
     return (
-        <>
+        < div className="Content-Wrap">
             <div>
-                <img src={movieDetail.image} alt="" />
+                <img className="Poster" src={movieDetail.image} alt="" />
             </div>
+            <div className="Detail-Wrap">
             <div>
                 <h3>{movieDetail.title}</h3>
             </div>
@@ -56,7 +58,8 @@ const MovieDetail = ({ movieDetail, ...props }) => {
             <div>
                 {(movieDetail.classification || {}).text}
             </div>
-        </>
+            </div>
+        </div>
     );
 
 }

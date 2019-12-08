@@ -4,7 +4,7 @@ import MovieDetail from "../organisms/MovieDetail"
 import { transitions, positions, types, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
 import MainTemplate from '../templates/MainTemplate';
-
+import "./MovieDetailPage.css"
 
 const API_URL = process.env.REACT_APP_API_URL;
 
