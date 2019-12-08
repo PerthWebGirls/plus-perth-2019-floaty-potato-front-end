@@ -19,7 +19,7 @@ class SignupForm extends React.Component {
   };
 
   on_success = () => {
-    this.setState({username: '', password: ''});
+    this.setState({ username: '', password: '' });
   }
 
   render() {
@@ -31,6 +31,13 @@ class SignupForm extends React.Component {
           type="text"
           name="username"
           value={this.state.username}
+          onChange={this.handle_change}
+        />
+        <label className="Label" htmlFor="email">Email</label>
+        <input className="Input"
+          type="email"
+          name="email"
+          value={this.state.email}
           onChange={this.handle_change}
         />
         <label htmlFor="password">Password</label>

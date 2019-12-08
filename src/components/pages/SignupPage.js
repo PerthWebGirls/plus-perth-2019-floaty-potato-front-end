@@ -1,20 +1,21 @@
 import React from "react";
-import NavBar from "../molecules/NavBar";
-import Footer from "../organisms/Footer";
 import SignupForm from "../organisms/SignupForm";
 import "./SignupPage.css"
+import MainTemplate from "../templates/MainTemplate";
 
-const SignupPage=({ movies, onSearch, ...props }) => {
+const SignupPage = ({ movies, onSearch, ...props }) => {
 
 
 
-    return (
-      <div className="page-container">
-        <NavBar />
+  return (
+    <div className="page-container">
+      <MainTemplate>
+
         <SignupForm handle_signup={props.handle_signup} />
-        <Footer />
+      </MainTemplate>
 
-      </div>
-    );
-  }
-  export default SignupPage;
+
+    </div>
+  );
+}
+export default SignupPage;

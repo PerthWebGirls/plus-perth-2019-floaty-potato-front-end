@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Route } from 'react-router-dom';
-import { withRouter } from 'react-router';
+// import { withRouter } from 'react-router';
 import MainPage from "../components/pages/MainPage";
 import LoginPage from "../components/pages/LoginPage";
 import SignupPage from "../components/pages/SignupPage";
 import MovieDetailPage from "../components/pages/MovieDetailPage";
-
+import ProfilePage from "../components/pages/ProfilePage"
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -20,9 +20,13 @@ class AppContainer extends Component {
       loading: true,
       errorMessage: "",
       searchValue: "",
-      displayed_form: "",
+      displayed_form: '',
       logged_in: localStorage.getItem('token') ? true : false,
-      username: "",
+      username: '',
+      email: '',
+      profileDetail: [],
+      userId: "",
+
 
     };
   }
@@ -72,8 +76,36 @@ class AppContainer extends Component {
 
   }
 
+  getProfileDetail({ userId }) {
+    fetch(`${API_URL}/profiles/${userId}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ profileDetail: data.results });
+      })
+  }
 
+  checkUserAuthenticated() {
+    if (this.state.logged_in) {
+      fetch(`${API_URL}/users/${this.state.userId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+        .then(res => res.json())
+        .then(json => {
+          this.setState(
+            {
+              username: json.username,
+              email: json.email,
+            }
 
+          );
+        });
+    }
+    else {
+      this.setState({ errorMessage: "user hasn't logged in yet" })
+    }
+  }
 
   handle_login = (e, data, onSuccess) => {
     e.preventDefault();
@@ -91,7 +123,9 @@ class AppContainer extends Component {
         this.setState({
           logged_in: true,
           displayed_form: '',
-          username: '' // json.user.username
+          username: json.username,
+          userId: json.id,
+          email: json.email,
         });
         if (typeof onSuccess === 'function') {
           onSuccess();
@@ -100,6 +134,7 @@ class AppContainer extends Component {
   };
 
   handle_signup = (e, data, onSuccess) => {
+    console.log("user posted  data", data);
     e.preventDefault();
     fetch(`${API_URL}/users/`, {
       method: 'POST',
@@ -114,7 +149,9 @@ class AppContainer extends Component {
         this.setState({
           logged_in: true,
           displayed_form: '',
-          username: json.username
+          username: json.username,
+          userId: json.id,
+          email: json.email
         });
         if (typeof onSuccess === 'function') {
           onSuccess();
@@ -131,19 +168,8 @@ class AppContainer extends Component {
   componentDidMount() {
     this.fetchApiData();
     this.getProviders();
+    this.checkUserAuthenticated();
 
-
-    if (this.state.logged_in) {
-      fetch(`${API_URL}/users/`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-      })
-        .then(res => res.json())
-        .then(json => {
-          this.setState({ username: json.username });
-        });
-    }
   }
 
 
@@ -157,6 +183,8 @@ class AppContainer extends Component {
                 movies={this.state.movies}
                 onSearch={this.searchMovie}
                 providers={this.state.providers}
+                logged_in={this.state.logged_in}
+                handle_logout={this.handle_logout}
 
               />
               <div style={{ color: 'red' }}>{this.state.errorMessage}</div>
@@ -190,6 +218,27 @@ class AppContainer extends Component {
         <Route path="/details/:key" component={MovieDetailPage}
           exact
         />
+
+
+
+        <Route path="/profile" component={() => {
+          return (
+            <>
+              <ProfilePage
+                profileDetail={this.state.profileDetail}
+                logged_in={this.state.logged_in}
+                handle_logout={this.handle_logout}
+
+              />
+            </>
+          );
+        }}
+          exact
+        />
+
+
+
+
       </>
     );
   }

@@ -1,8 +1,24 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import Button from '../atoms/Button';
+import { withAlert } from 'react-alert'
+import { useAlert } from 'react-alert'
+
 const MovieDetail = ({ movieDetail, ...props }) => {
-    console.log("MovieDetail_3", movieDetail);
-    console.log("provider URL", movieDetail.provider[0].url)
+    const wishList = [];
+    const alert = useAlert()
+    const addToList = () => {
+        if (wishList.includes(movieDetail)) {
+            //show message info item already exist in your list
+            alert.show('This movie already exist in your watch list');
+        } else {
+            //add item to the list and success message item added successfully
+            wishList.push(movieDetail)
+            alert.show('Movie has been added successfully to your watch list');
+            console.log("wishlist", wishList);
+        }
+
+    };
     return (
         <>
             <div>
@@ -22,6 +38,7 @@ const MovieDetail = ({ movieDetail, ...props }) => {
                     </div>
                 ))}
             </div>
+            <Button onButtonClick={addToList}>Add to watch list</Button>
             <div>
                 <p>{movieDetail.summary}</p>
                 <h5>{movieDetail.duration}</h5>
@@ -43,4 +60,4 @@ const MovieDetail = ({ movieDetail, ...props }) => {
     );
 
 }
-export default MovieDetail;
+export default withAlert()(MovieDetail);
