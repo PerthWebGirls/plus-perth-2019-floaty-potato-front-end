@@ -1,21 +1,20 @@
 import React from "react";
-// import "./MainPage.css";
-import NavBar from "../molecules/NavBar";
-import Footer from "../organisms/Footer";
 import BannerBoard from "../organisms/BannerBoard";
 import FilterBoard from "../organisms/FilterBoard";
 import MovieGrid from "../organisms/MovieGrid";
 import "./Mainpage.css"
+import MainTemplate from "../templates/MainTemplate";
 
 const MainPage = ({ movies, providers, onSearch, ...props }) => {
 
   return (
     <div className="page-container">
-      <NavBar />
-      <BannerBoard onSearch={onSearch} />
-      <FilterBoard providerList={providers} />
-      <MovieGrid movies={movies} />
-      <Footer />
+      <MainTemplate >
+        <BannerBoard onSearch={onSearch} />
+        <FilterBoard providerList={providers} />
+        <MovieGrid movies={movies} />
+      </MainTemplate>
+
     </div>
   );
 }
