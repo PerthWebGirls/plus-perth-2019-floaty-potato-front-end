@@ -62,6 +62,7 @@ class SignupForm extends React.Component {
           <input className="button" type="submit" />
         </form>
       </>
+
     );
   }
 }

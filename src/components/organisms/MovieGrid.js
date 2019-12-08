@@ -4,10 +4,10 @@ import "./MovieGrid.css"
 import { Link } from "react-router-dom";
 
 
-const imageStyle = {
-  height: 200,
-  width: 150,
-};
+// const imageStyle = {
+//   height: 200,
+//   width: 150,
+// };
 class MovieGrid extends Component {
   state = {
     movieIndex: '',
@@ -19,27 +19,26 @@ class MovieGrid extends Component {
         <div className="Grid">
           {this.props.movies.map((movie, index) => (
             <div className="MovieContainer" key={index}>
-              <ul className="MovieDetails">
+              
                 < Link to={`/details/${index}`}>
-                  <img style={imageStyle} src={movie.image} alt="movie thumbnail" />
+                  <img className="PosterGrid" src={movie.image} alt="movie thumbnail" />
 
                 </Link>
-                < Link to={`/details/${index}`}>
+                {/* <ul className="MovieDetails"> */}
+                {/* < Link to={`/details/${index}`}>
                   <li>{movie.title}</li>
                 </Link>
-                <li>{movie.release_date}</li>
-                <li>
+                <li>{movie.release_date}</li> */}
+                <li className="MovieProvider">
                   {movie.provider.map((item, index) => (
-                    <div key={index}>
-                      <ul className="MovieProvider">
+                      <ul key={index}>
                         {/* <Link to={item.url}> */}
                         <li className="ProviderItems">{item.name}</li>
                         {/* </Link> */}
                       </ul>
-                    </div>
                   ))}
                 </li>
-              </ul>
+              {/* </ul> */}
             </div>
           ))}
         </div>
