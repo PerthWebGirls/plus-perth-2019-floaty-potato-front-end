@@ -3,16 +3,21 @@ import PropTypes from 'prop-types';
 import "./LoginForm.css"
 import PageTitles from '../atoms/PageTitles';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom'
+import Button from "../atoms/Button";
 
 class LoginForm extends React.Component {
   state = {
     username: '',
     password: '',
     email: '',
-    redirect: false,
   };
+  static contextTypes = {
+    router: PropTypes.object
+  }
 
+  redirectToTarget = () => {
+    this.context.router.history.push(`/`)
+  }
   handle_change = e => {
     e.preventDefault();
     const name = e.target.name;
@@ -24,25 +29,20 @@ class LoginForm extends React.Component {
     });
   };
 
-
   on_success = () => {
+    this.setState({ username: '', password: '' });
 
-    this.setState({ username: '', password: '', redirect: true });
-    this.context.router.push("/");
 
   }
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to='/' />
-    }
-  }
+
+
   render() {
     return (
       <>
         <div>
-          {this.renderRedirect()}
+          {/* {this.renderRedirect()} */}
         </div>
-        <form className="Content-Wrap" method="POST" onSubmit={e => this.props.handle_login(e, this.state, this.on_success)}>
+        <form className="Content-Wrap" onSubmit={e => this.props.handleLogin(e, this.state, this.on_success)}>
           <PageTitles>Login</PageTitles>
           <label className="Label" htmlFor="username">Username</label>
           <input className="Input"
@@ -59,7 +59,8 @@ class LoginForm extends React.Component {
             value={this.state.password}
             onChange={this.handle_change}
           />
-          <button className="SubmitButton" type="submit">Log In</button>
+
+          <Button className="SubmitButton" onButtonClick={this.redirectToTarget}>Log In</Button>
           <div><span>Don't you have any account? <Link to="/Signup">Join here</Link></span></div >
         </form >
       </>
@@ -70,5 +71,5 @@ class LoginForm extends React.Component {
 export default LoginForm;
 
 LoginForm.propTypes = {
-  handle_login: PropTypes.func.isRequired
+  handleLogin: PropTypes.func.isRequired
 };

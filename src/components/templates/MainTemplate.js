@@ -3,10 +3,10 @@ import React from 'react';
 import Footer from "../organisms/Footer";
 import NavBar from '../molecules/NavBar';
 
-const MainTemplate = ({ logged_in, handle_logout, ...props }) => {
+const MainTemplate = ({ loggedIn, handleLogout, handleLogin, ...props }) => {
     return (
         <div >
-            <NavBar isLoggedIn={logged_in} handleLogout={handle_logout}
+            <NavBar isLoggedIn={loggedIn} handleLogout={handleLogout} handleLogin={handleLogin}
             />
             {props.children}
             <Footer />
