@@ -20,12 +20,12 @@ class AppContainer extends Component {
       loading: true,
       errorMessage: "",
       searchValue: "",
-      displayed_form: '',
-      logged_in: localStorage.getItem('token') ? true : false,
+      loggedIn: localStorage.getItem('token') ? true : false,
       username: '',
       email: '',
       profileDetail: [],
       userId: "",
+      history: "",
 
 
     };
@@ -33,7 +33,7 @@ class AppContainer extends Component {
 
 
   fetchApiData() {
-    fetch(`${API_URL}/movies/`)
+    fetch(`${API_URL}/api/movies/`)
       .then(res => res.json())
       .then(data => {
         this.setState({ movies: data.results });
@@ -45,7 +45,7 @@ class AppContainer extends Component {
   }
 
   getProviders() {
-    fetch(`${API_URL}/providers/`)
+    fetch(`${API_URL}/api/providers/`)
       .then(response => response.json())
       .then(data => {
         this.setState({ providers: data.results })
@@ -60,7 +60,7 @@ class AppContainer extends Component {
   searchMovie = (searchValue) => {
     this.setState({ loading: true })
     console.log(searchValue)
-    fetch(`${API_URL}/movies/?search=${searchValue}`)
+    fetch(`${API_URL}/api/movies/?search=${searchValue}`)
       .then(response => response.json())
       .then(data => {
         this.setState({ movies: data.results });
@@ -85,8 +85,8 @@ class AppContainer extends Component {
   }
 
   checkUserAuthenticated() {
-    if (this.state.logged_in) {
-      fetch(`${API_URL}/users/${this.state.userId}`, {
+    if (this.state.loggedIn) {
+      fetch(`${API_URL}/api/users/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -107,70 +107,80 @@ class AppContainer extends Component {
     }
   }
 
-  handle_login = (e, data, onSuccess) => {
+  handleLogin = (e, data, onSuccess) => {
     e.preventDefault();
-    fetch(`${API_URL}/token/`, {
+    fetch(`${API_URL}/api/token/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({ data })
     })
       .then(res => res.json())
       .then(json => {
         console.log(json);
-        localStorage.setItem('token', json.access);
+        console.log(localStorage.setItem('token', json.access));
+
         this.setState({
-          logged_in: true,
-          displayed_form: '',
+          loggedIn: true,
           username: json.username,
-          userId: json.id,
           email: json.email,
         });
+        console.log("is logged in:", this.state.loggedIn);
         if (typeof onSuccess === 'function') {
           onSuccess();
         }
       });
+
   };
 
-  handle_signup = (e, data, onSuccess) => {
+  handleSignup = (e, data, onSuccess) => {
     console.log("user posted  data", data);
     e.preventDefault();
-    fetch(`${API_URL}/users/`, {
+    fetch(`${API_URL}/api/users/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(
+        {
+          username: data.username,
+          password: data.password,
+          email: data.email,
+          profile: {}
+        })
     })
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('token', json.token);
         this.setState({
-          logged_in: true,
-          displayed_form: '',
+          loggedIn: true,
           username: json.username,
           userId: json.id,
-          email: json.email
+          email: json.email,
+
         });
+
         if (typeof onSuccess === 'function') {
           onSuccess();
         }
       });
   };
 
-  handle_logout = () => {
+  handleLogout = () => {
     localStorage.removeItem('token');
-    this.setState({ logged_in: false, username: '' });
+    this.setState({ loggedIn: false, username: '' });
   };
 
 
   componentDidMount() {
     this.fetchApiData();
     this.getProviders();
-    this.checkUserAuthenticated();
+    // this.checkUserAuthenticated();
 
   }
+
+
 
 
   render() {
@@ -183,8 +193,9 @@ class AppContainer extends Component {
                 movies={this.state.movies}
                 onSearch={this.searchMovie}
                 providers={this.state.providers}
-                logged_in={this.state.logged_in}
-                handle_logout={this.handle_logout}
+                loggedIn={this.state.loggedIn}
+                handleLogin={this.handleLogin}
+                handleLogout={this.handleLogout}
 
               />
               <div style={{ color: 'red' }}>{this.state.errorMessage}</div>
@@ -196,7 +207,7 @@ class AppContainer extends Component {
         <Route path="/Login" component={() => {
           return (
             <>
-              <LoginPage handle_login={this.handle_login}
+              <LoginPage handleLogin={this.handleLogin} loggedIn={this.state.loggedIn}
               />
               <div style={{ color: 'red' }}>{this.state.errorMessage}</div>
             </>
@@ -207,7 +218,7 @@ class AppContainer extends Component {
         <Route path="/Signup" component={() => {
           return (
             <>
-              <SignupPage handle_signup={this.handle_signup}
+              <SignupPage handle_signup={this.handleSignup} loggedIn={this.state.loggedIn}
               />
               <div style={{ color: 'red' }}>{this.state.errorMessage}</div>
             </>
@@ -226,8 +237,8 @@ class AppContainer extends Component {
             <>
               <ProfilePage
                 profileDetail={this.state.profileDetail}
-                logged_in={this.state.logged_in}
-                handle_logout={this.handle_logout}
+                loggedIn={this.state.loggedIn}
+                handleLogout={this.handleLogout}
 
               />
             </>
