@@ -17,14 +17,14 @@ function NavBar({ logged_in, handle_logout, onTextLinkClick, onIconClick, ...pro
         </TextLink>
         </div>
       </Link>
-      <div>
+      <div className="NavMenu">
         <ul>
           <Link to="/Login">
-            <li >login</li>
+            <li >login / Signup</li>
           </Link>
-          <Link to="/Signup">
+          {/* <Link to="/Signup">
             <li >signup</li>
-          </Link>
+          </Link> */}
         </ul>
       </div>
     </div >
