@@ -1,14 +1,17 @@
 import React from 'react';
-import AppNav from "./organisms/AppNav";
-import Footer from "./organisms/Footer";
 
-const MainTemplate = () => {
-    return(
+import Footer from "../organisms/Footer";
+import NavBar from '../molecules/NavBar';
+
+const MainTemplate = ({ loggedIn, handleLogout, handleLogin, ...props }) => {
+    return (
         <div >
-        <AppNav/>
-        <Footer/>
+            <NavBar loggedIn={loggedIn} handleLogout={handleLogout} handleLogin={handleLogin}
+            />
+            {props.children}
+            <Footer />
         </div>
-        
+
     );
 }
 

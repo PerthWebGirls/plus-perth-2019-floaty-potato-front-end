@@ -24,8 +24,9 @@
     align-items: center;
     align-content: center;
     color: red;
-    padding-right: 30px;
-
-    
+    padding-right:5px;
+}
+a {
+    text-decoration: none;
 }
   

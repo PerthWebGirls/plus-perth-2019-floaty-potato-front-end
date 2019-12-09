@@ -1,0 +1,37 @@
+.Content-Wrap{
+    padding-bottom: 50px;
+    height: 100%;
+}
+.Cont{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.Poster{
+    margin-top: 20px;
+    width: 100%;
+    max-width:300px;
+}
+
+.Detail-Wrap{
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    max-width:500px;
+    
+}
+.WishListButton{
+    align-self: center;
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+    color: red;
+    border: solid red;
+    background-color: white;
+
+}
+.WishListButton:hover{
+    padding-top:15px;
+
+
+}

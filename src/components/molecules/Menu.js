@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TextLink from "../atoms/TextLink";
 import Icon from "../atoms/Icon";
 import "./Menu.css";
-
+import { Link } from "react-router-dom";
 
 class Menu extends Component {
   container = React.createRef();
@@ -32,25 +32,22 @@ class Menu extends Component {
     return (
       <div className="container" ref={this.container}>
         <Icon onIconClick={this.handleButtonClick} />
-        
+
         {this.state.showMenu && (
-          <div className="dropdown"> 
-          <div className="dropdown-content">
-            <TextLink linkType="Profile" onButtonClick={this.props.onTextLinkClick}>
-              Profile
+          <div className="dropdown">
+            <div className="dropdown-content">
+              <Link to="/profile" >
+                <TextLink linkType="Profile" onButtonClick={this.props.onTextLinkClick}>
+                  Profile
                 </TextLink>
+              </Link>
+            </div>
+            <div className="dropdown-content">
+              <TextLink linkType="log out" onButtonClick={this.props.onTextLinkClick}>
+                Log out
+              </TextLink>
+            </div>
           </div>
-          <div className="dropdown-content">
-            <TextLink linkType="Watch List" onButtonClick={this.props.onTextLinkClick}>
-              Watch List
-                </TextLink>
-                </div>
-                <div className="dropdown-content">
-            <TextLink linkType="log out" onButtonClick={this.props.onTextLinkClick}>
-              Log out
-                </TextLink>
-                </div>
-                </div>
         )}
       </div>
     );

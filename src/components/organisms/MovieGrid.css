@@ -12,51 +12,30 @@
 
 .MovieContainer{
     display: flex;
-    color: royalblue;
+    flex-direction: column;
+    justify-content: space-between;
     margin: 5px;
-    height: 450px;
+    height: 500px;
     width: 300px;
-    border:solid black;
-    align-items: flex-end;
+    border-bottom: solid red;
 }
+.PosterGrid{
+    height: auto;
+    width:100%;
+}
+
 ul{
     list-style-type: none;
 }
 
-.MovieDetails{
-    display: flex;
-    width: 100%;
-    height: 50%;
-    flex-direction: column;
-    border: solid red;
-    flex-wrap: wrap;
-
-}
-
-.MovieTitle {
- color: brown;
-}
-
-.MovieRelease{
-    color: brown;
-}
-
 .MovieProvider{
     display: flex;
-    height: 30px;
-    width: 30px;
     flex-wrap: wrap;
-    justify-content: flex-end;
-    align-self: flex-end;
     
-    
-
 }
 
 .ProviderItems{
-    display:flex ;
-    width: 60px;
-    height: 60px;
-    border: solid blue;
-    color: brown;
+    display:flex;
+    width: auto;
+    height: 25px;
 }

@@ -1,27 +1,39 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import NavBar from "../molecules/NavBar"
-import Footer from "../organisms/Footer"
 import MovieDetail from "../organisms/MovieDetail"
+import { transitions, positions, types, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+import MainTemplate from '../templates/MainTemplate';
+import "./MovieDetailPage.css"
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 class MovieDetailPage extends React.Component {
     state = { movieDetail: [] };
-
+    options = {
+        // you can also just use 'bottom center'
+        position: positions.TOP_CENTER,
+        timeout: 3000,
+        offset: '30px',
+        type: types.INFO,
+        // you can also just use 'scale'
+        transition: transitions.FADE
+    }
 
     constructor(props) {
         super(props);
 
         this.getMovieDetail = this.getMovieDetail.bind(this);
-        console.log(props);
+        console.log("props is ", props);
         const movieIndex = props.match.params.key;
+        this.getMovieDetail(Number(movieIndex) + 1);
 
-        this.getMovieDetail(Number(movieIndex)+1);
+
     }
-
-
     getMovieDetail(movieIndex) {
         console.log("movieIndex", movieIndex)
-        return fetch(`http://localhost:8000/api/movies/${movieIndex}`)
+
+        return fetch(`${API_URL}/movies/${movieIndex}`)
             .then(response => response.json())
             .then(data => {
                 console.log("data", data);
@@ -39,9 +51,11 @@ class MovieDetailPage extends React.Component {
     render() {
         console.log("MovieDetail_2", this.state.movieDetail);
         return (<div className="page-container">
-            <NavBar />
-            <MovieDetail movieDetail={this.state.movieDetail} />
-            <Footer />
+            <MainTemplate>
+                <AlertProvider template={AlertTemplate} {...this.options}>
+                    <MovieDetail movieDetail={this.state.movieDetail} />
+                </AlertProvider>
+            </MainTemplate>
         </div>);
     }
 }

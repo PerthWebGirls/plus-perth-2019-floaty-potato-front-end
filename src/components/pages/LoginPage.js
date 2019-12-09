@@ -1,19 +1,17 @@
 import React from "react";
-import NavBar from "../molecules/NavBar";
-import Footer from "../organisms/Footer";
 import LoginForm from "../organisms/LoginForm";
+import MainTemplate from "../templates/MainTemplate";
 
-const LoginPage=({ movies, onSearch, ...props }) => {
+const LoginPage = ({ loggedIn, handleLogin, handleLogout, ...props }) => {
 
 
+  return (
+    <div className="page-container">
+      <MainTemplate loggedIn={loggedIn} handleLogout={handleLogout}>
+        <LoginForm handleLogin={handleLogin} loggedIn={loggedIn} />
+      </MainTemplate>
 
-    return (
-      <div className="page-container">
-        <NavBar />
-        <LoginForm handle_login={props.handle_login} />
-        <Footer />
-
-      </div>
-    );
-  }
-  export default LoginPage;
+    </div>
+  );
+}
+export default LoginPage;

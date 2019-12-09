@@ -19,7 +19,17 @@ h4 {
 
 }
 
-.Submit {
-    width: 150px;
+.SubmitButton{
+    margin: 10px;
+    padding: 10px;
+    color: red;
+    border: solid red;
+    background-color: white;
+
+}
+.SubmitButton:hover{
+    padding:15px;
+
+
 }
 
