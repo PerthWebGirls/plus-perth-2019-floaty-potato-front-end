@@ -114,16 +114,16 @@ class AppContainer extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ data })
+      body: JSON.stringify({ ...data })
     })
       .then(res => res.json())
       .then(json => {
         console.log(json);
         console.log(localStorage.setItem('token', json.access));
-
         this.setState({
           loggedIn: true,
           username: json.username,
+          userId: json.id,
           email: json.email,
         });
         console.log("is logged in:", this.state.loggedIn);
@@ -134,7 +134,7 @@ class AppContainer extends Component {
 
   };
 
-  handleSignup = (e, data, onSuccess) => {
+  handleSignup = (e, data, onSuccess, onFailure) => {
     console.log("user posted  data", data);
     e.preventDefault();
     fetch(`${API_URL}/api/users/`, {
@@ -150,7 +150,14 @@ class AppContainer extends Component {
           profile: {}
         })
     })
-      .then(res => res.json())
+      .then((res) => {
+        if (res.status >= 400) {
+          // TODO: refactor tomorrow
+          res.json().then((err) => onFailure(err));
+          throw new Error('There was an issue while signing up');
+        }
+        return res.json();
+      })
       .then(json => {
         localStorage.setItem('token', json.token);
         this.setState({
@@ -158,16 +165,18 @@ class AppContainer extends Component {
           username: json.username,
           userId: json.id,
           email: json.email,
-
         });
 
         if (typeof onSuccess === 'function') {
           onSuccess();
         }
-      });
+      }).catch(() => {
+
+      })
   };
 
   handleLogout = () => {
+    console.log('logging out...')
     localStorage.removeItem('token');
     this.setState({ loggedIn: false, username: '' });
   };
@@ -207,7 +216,7 @@ class AppContainer extends Component {
         <Route path="/Login" component={() => {
           return (
             <>
-              <LoginPage handleLogin={this.handleLogin} loggedIn={this.state.loggedIn}
+              <LoginPage handleLogin={this.handleLogin} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout}
               />
               <div style={{ color: 'red' }}>{this.state.errorMessage}</div>
             </>
@@ -218,7 +227,7 @@ class AppContainer extends Component {
         <Route path="/Signup" component={() => {
           return (
             <>
-              <SignupPage handle_signup={this.handleSignup} loggedIn={this.state.loggedIn}
+              <SignupPage handle_signup={this.handleSignup} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout}
               />
               <div style={{ color: 'red' }}>{this.state.errorMessage}</div>
             </>

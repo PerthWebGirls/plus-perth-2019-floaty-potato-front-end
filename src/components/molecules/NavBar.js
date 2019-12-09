@@ -43,12 +43,12 @@ function NavBar({ loggedIn, handleLogout, onTextLinkClick, onIconClick, ...props
       <div className="NavMenu">
         <Menu onIconClick={onIconClick} />
         <ul>
-          <li onClick={props.handleLogout}>logout</li>
+          <li onClick={handleLogout}>logout</li>
         </ul>
       </div>
     </div>
   );
-  return <div>{props.loggedIn ? logged_in_nav : logged_out_nav}</div>;
+  return <div>{loggedIn ? logged_in_nav : logged_out_nav}</div>;
 }
 
 export default NavBar;

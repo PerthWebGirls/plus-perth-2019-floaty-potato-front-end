@@ -7,7 +7,9 @@ class SignupForm extends React.Component {
   state = {
     username: '',
     password: '',
+    email: '',
     redirect: false,
+    errors: {}
   };
 
   handle_change = e => {
@@ -22,9 +24,16 @@ class SignupForm extends React.Component {
 
   on_success = () => {
     this.setState({ username: '', password: '' });
-    this.context.router.push("/");
+    this.setState({ redirect: true });
+    // // this.context.router.push("/");
 
   }
+
+  on_failure = (err) => {
+    this.setState({ errors: err });
+    console.log(err);
+  }
+
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to='/' />
@@ -36,8 +45,13 @@ class SignupForm extends React.Component {
         <div>
           {this.renderRedirect()}
         </div>
-        <form className="Content-Wrap" onSubmit={e => this.props.handle_signup(e, this.state, this.on_success)}>
+
+        <form className="Content-Wrap" onSubmit={e => this.props.handle_signup(e, this.state, this.on_success, this.on_failure)}>
           <PageTitles>Sign Up</PageTitles>
+          <div>
+            {Object.values(this.state.errors)
+              .map((msg, idx) => <span style={{ color: 'red' }} key={idx}>{msg}</span>)}
+          </div>
           <label htmlFor="username">Username</label>
           <input
             type="text"

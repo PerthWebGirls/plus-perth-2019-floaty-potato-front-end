@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import "./LoginForm.css"
 import PageTitles from '../atoms/PageTitles';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Button from "../atoms/Button";
 
 class LoginForm extends React.Component {
@@ -10,14 +10,16 @@ class LoginForm extends React.Component {
     username: '',
     password: '',
     email: '',
+    redirect: false
   };
   static contextTypes = {
     router: PropTypes.object
   }
 
-  redirectToTarget = () => {
-    this.context.router.history.push(`/`)
-  }
+  // redirectToTarget = () => {
+  // debugger;
+  // this.context.router.history.push(`/`)
+  // }
   handle_change = e => {
     e.preventDefault();
     const name = e.target.name;
@@ -30,19 +32,30 @@ class LoginForm extends React.Component {
   };
 
   on_success = () => {
-    this.setState({ username: '', password: '' });
-
-
+    this.setState({ username: 'bbb', password: '', redirect: true });
   }
 
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/' />
+    }
+  }
+
+  componentWillMount() {
+    console.log('mounting component');
+  }
+
+  componentWillUnmount() {
+    console.log('unmounting component');
+  }
 
   render() {
     return (
       <>
         <div>
-          {/* {this.renderRedirect()} */}
+          {this.renderRedirect()}
         </div>
-        <form className="Content-Wrap" onSubmit={e => this.props.handleLogin(e, this.state, this.on_success)}>
+        <form className="Content-Wrap" onSubmit={e => this.props.handleLogin(e, { username: this.state.username, password: this.state.password }, this.on_success)}>
           <PageTitles>Login</PageTitles>
           <label className="Label" htmlFor="username">Username</label>
           <input className="Input"
@@ -60,7 +73,8 @@ class LoginForm extends React.Component {
             onChange={this.handle_change}
           />
 
-          <Button onButtonClick={this.redirectToTarget}>submit</Button>
+          <input className="button" type="submit" />
+
           <div><span>Don't you have any account? <Link to="/Signup">Join here</Link></span></div >
         </form >
       </>
