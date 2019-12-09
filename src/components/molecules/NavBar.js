@@ -11,7 +11,7 @@ function NavBar({ loggedIn, handleLogout, onTextLinkClick, onIconClick, ...props
     <div className="NavBar">
       <Link to="/">
         <div className="NavLogo">
-          <img className="Logo" src="" alt="" />
+          <img src="/static/popcorn-culture.png" alt="popcorn" />
           <TextLink linkType="Popcornculture" onButtonClick={onTextLinkClick}>
             Popcorn Culture
         </TextLink>
@@ -32,7 +32,7 @@ function NavBar({ loggedIn, handleLogout, onTextLinkClick, onIconClick, ...props
     <div className="NavBar">
       <Link to="/">
         <div className="NavLogo">
-          <img className="Logo" src="" alt="" />
+        <img src="/static/popcorn-culture.png" alt="popcorn" />
           <TextLink linkType="Popcornculture" onButtonClick={onTextLinkClick}>
             Popcorn Culture
         </TextLink>

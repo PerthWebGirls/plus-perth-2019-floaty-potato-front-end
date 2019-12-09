@@ -24,10 +24,10 @@ class SearchBoard extends Component {
 
   render() {
     return (
-      <div >
-        <form>
+      <div className="SearchContainer">
+        <form className="SearchForm">
           <TextInput className="SearchForm" placeholder="Search for..." value={this.state.searchValue} onChange={this.handleOnChange} />
-          <Button  className="SearchForm" onButtonClick={this.handleSearch}>Search</Button>
+          <Button  className="SearchFormButton" onButtonClick={this.handleSearch}>Search</Button>
         </form>
       </div >
     );
