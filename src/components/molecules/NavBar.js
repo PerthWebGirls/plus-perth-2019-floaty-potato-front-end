@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
-function NavBar({ logged_in, handle_logout, onTextLinkClick, onIconClick, ...props }) {
+function NavBar({ loggedIn, handleLogout, onTextLinkClick, onIconClick, ...props }) {
   const logged_out_nav = (
     <div className="NavBar">
       <Link to="/">
@@ -17,14 +17,12 @@ function NavBar({ logged_in, handle_logout, onTextLinkClick, onIconClick, ...pro
         </TextLink>
         </div>
       </Link>
-      <div>
+      <div className="NavMenu">
         <ul>
           <Link to="/Login">
-            <li >login</li>
+            <li >login / Signup</li>
           </Link>
-          <Link to="/Signup">
-            <li >signup</li>
-          </Link>
+
         </ul>
       </div>
     </div >
@@ -43,17 +41,18 @@ function NavBar({ logged_in, handle_logout, onTextLinkClick, onIconClick, ...pro
       <div className="NavMenu">
         <Menu onIconClick={onIconClick} />
         <ul>
-          <li onClick={props.handle_logout}>logout</li>
+
+          <li onClick={handleLogout}>logout</li>
         </ul>
       </div>
     </div>
   );
-  return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
+  return <div>{loggedIn ? logged_in_nav : logged_out_nav}</div>;
 }
 
 export default NavBar;
 
 NavBar.propTypes = {
-  logged_in: PropTypes.bool.isRequired,
-  handle_logout: PropTypes.func.isRequired
+  loggedIn: PropTypes.bool.isRequired,
+  handleLogout: PropTypes.func.isRequired
 };

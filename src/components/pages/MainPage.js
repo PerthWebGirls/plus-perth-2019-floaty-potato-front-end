@@ -5,11 +5,11 @@ import MovieGrid from "../organisms/MovieGrid";
 import "./Mainpage.css"
 import MainTemplate from "../templates/MainTemplate";
 
-const MainPage = ({ movies, providers, onSearch, ...props }) => {
+const MainPage = ({ handleLogin, loggedIn, handleLogout, movies, providers, onSearch, ...props }) => {
 
   return (
     <div className="page-container">
-      <MainTemplate >
+      <MainTemplate handleLogin={handleLogin} loggedIn={loggedIn} handleLogout={handleLogout} >
         <BannerBoard onSearch={onSearch} />
         <FilterBoard providerList={providers} />
         <MovieGrid movies={movies} />

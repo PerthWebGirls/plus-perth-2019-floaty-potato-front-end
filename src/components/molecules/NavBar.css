@@ -26,6 +26,11 @@
     align-content: center;
     color: red;
     padding-right:5px;
+
+}
+a {
+    text-decoration: none;
+
 }
 
 .NavLogo img {
