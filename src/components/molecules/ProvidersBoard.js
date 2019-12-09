@@ -4,7 +4,6 @@ import ProviderItem from "../atoms/ProviderItem";
 import "./ProviderBoard.css"
 
 const ProviderBoard = (props) => {
-  {
     return (
       <div className="ProviderBoard">
           {props.providerList.map((provider, index) => (
@@ -12,7 +11,6 @@ const ProviderBoard = (props) => {
         ))}
       </div>
     );
-  }
 };
 
 export default ProviderBoard;

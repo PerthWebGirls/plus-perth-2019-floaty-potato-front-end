@@ -1,3 +1,60 @@
 .FilterBoard{
     font-family: 'Roboto', sans-serif;
+    background-color: black;
+}
+
+.RedDivider {
+    border: solid 2px red;
+    margin: 0px;
+}
+
+.RefineTitle {
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    padding-top: 20px;
+    text-transform: uppercase;
+    font-family: 'Bebas Neue', cursive;
+    /* text-shadow: 1px 1px black; */
+}
+
+.ChangeLayout {
+    font-size: 20px;
+    text-align: center;
+}
+
+.ProviderBoardContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.ProviderBoard {
+    background-color: white;
+    margin: 10px 30px;
+    border-radius: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 15px;
+    width: 60vw;
+}
+
+.LayoutContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.ProviderIcon {
+    max-width: 50px;
+    border-radius: 10px;
+    margin: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    transition: 0.5s;
+}
+.ProviderIcon:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transform: scale(1.2);
 }

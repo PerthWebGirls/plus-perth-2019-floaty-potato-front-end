@@ -3,3 +3,13 @@
     font-family: 'Roboto', sans-serif;
 
 }
+
+.BannerImage {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.big-pop {
+    max-width: 300px;
+}

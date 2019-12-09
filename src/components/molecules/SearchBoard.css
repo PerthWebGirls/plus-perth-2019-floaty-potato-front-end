@@ -1,3 +1,14 @@
 .SearchForm {
     font-family: 'Roboto', sans-serif;
 }
+
+.SearchForm input {
+    border-radius: 20px 0px 0px 20px;
+    border: none;
+    padding: 10px;
+}
+
+.SearchContainer {
+    display: flex;
+    justify-content: center;
+}
