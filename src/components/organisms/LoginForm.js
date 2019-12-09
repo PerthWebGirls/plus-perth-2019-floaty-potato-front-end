@@ -15,11 +15,6 @@ class LoginForm extends React.Component {
   static contextTypes = {
     router: PropTypes.object
   }
-
-  // redirectToTarget = () => {
-  // debugger;
-  // this.context.router.history.push(`/`)
-  // }
   handle_change = e => {
     e.preventDefault();
     const name = e.target.name;

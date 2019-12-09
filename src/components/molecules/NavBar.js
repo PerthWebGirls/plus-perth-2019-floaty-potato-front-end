@@ -22,9 +22,7 @@ function NavBar({ loggedIn, handleLogout, onTextLinkClick, onIconClick, ...props
           <Link to="/Login">
             <li >login / Signup</li>
           </Link>
-          {/* <Link to="/Signup">
-            <li >signup</li>
-          </Link> */}
+
         </ul>
       </div>
     </div >
@@ -43,6 +41,7 @@ function NavBar({ loggedIn, handleLogout, onTextLinkClick, onIconClick, ...props
       <div className="NavMenu">
         <Menu onIconClick={onIconClick} />
         <ul>
+
           <li onClick={handleLogout}>logout</li>
         </ul>
       </div>
