@@ -48,12 +48,14 @@ class SignupForm extends React.Component {
 
         <form className="Content-Wrap" onSubmit={e => this.props.handle_signup(e, this.state, this.on_success, this.on_failure)}>
           <PageTitles>Sign Up</PageTitles>
+
           <div>
             {Object.values(this.state.errors)
               .map((msg, idx) => <span style={{ color: 'red' }} key={idx}>{msg}</span>)}
           </div>
-          <label htmlFor="username">Username</label>
-          <input
+
+          <label className="Label" htmlFor="username">Username</label>
+          <input className="Input"
             type="text"
             name="username"
             value={this.state.username}
@@ -66,8 +68,8 @@ class SignupForm extends React.Component {
             value={this.state.email}
             onChange={this.handle_change}
           />
-          <label htmlFor="password">Password</label>
-          <input
+          <label className="Label" htmlFor="password">Password</label>
+          <input className="Input"
             type="password"
             name="password"
             value={this.state.password}

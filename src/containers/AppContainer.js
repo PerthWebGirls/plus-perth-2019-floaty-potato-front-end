@@ -33,7 +33,7 @@ class AppContainer extends Component {
 
 
   fetchApiData() {
-    fetch(`${API_URL}/api/movies/`)
+    fetch(`${API_URL}/movies/`)
       .then(res => res.json())
       .then(data => {
         this.setState({ movies: data.results });
@@ -45,7 +45,7 @@ class AppContainer extends Component {
   }
 
   getProviders() {
-    fetch(`${API_URL}/api/providers/`)
+    fetch(`${API_URL}/providers/`)
       .then(response => response.json())
       .then(data => {
         this.setState({ providers: data.results })
@@ -60,7 +60,7 @@ class AppContainer extends Component {
   searchMovie = (searchValue) => {
     this.setState({ loading: true })
     console.log(searchValue)
-    fetch(`${API_URL}/api/movies/?search=${searchValue}`)
+    fetch(`${API_URL}/movies/?search=${searchValue}`)
       .then(response => response.json())
       .then(data => {
         this.setState({ movies: data.results });
@@ -86,7 +86,7 @@ class AppContainer extends Component {
 
   checkUserAuthenticated() {
     if (this.state.loggedIn) {
-      fetch(`${API_URL}/api/users/`, {
+      fetch(`${API_URL}/users/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -109,7 +109,7 @@ class AppContainer extends Component {
 
   handleLogin = (e, data, onSuccess) => {
     e.preventDefault();
-    fetch(`${API_URL}/api/token/`, {
+    fetch(`${API_URL}/token/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -137,7 +137,7 @@ class AppContainer extends Component {
   handleSignup = (e, data, onSuccess, onFailure) => {
     console.log("user posted  data", data);
     e.preventDefault();
-    fetch(`${API_URL}/api/users/`, {
+    fetch(`${API_URL}/users/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

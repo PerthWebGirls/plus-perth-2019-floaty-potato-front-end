@@ -1,7 +1,6 @@
 import React from 'react';
 import "./MovieDetail.css"
 import { Link } from "react-router-dom";
-import Button from '../atoms/Button';
 import { withAlert } from 'react-alert'
 import { useAlert } from 'react-alert'
 
@@ -22,6 +21,7 @@ const MovieDetail = ({ movieDetail, ...props }) => {
     };
     return (
         < div className="Content-Wrap">
+            <div className="Cont">
             <div>
                 <img className="Poster" src={movieDetail.image} alt="" />
             </div>
@@ -40,7 +40,7 @@ const MovieDetail = ({ movieDetail, ...props }) => {
                     </div>
                 ))}
             </div>
-            <Button onButtonClick={addToList}>Add to watch list</Button>
+            <button className="WishListButton" onButtonClick={addToList}>Add to watch list</button>
             <div>
                 <p>{movieDetail.summary}</p>
                 <h5>{movieDetail.duration}</h5>
@@ -57,6 +57,7 @@ const MovieDetail = ({ movieDetail, ...props }) => {
             </div>
             <div>
                 {(movieDetail.classification || {}).text}
+            </div>
             </div>
             </div>
         </div>
