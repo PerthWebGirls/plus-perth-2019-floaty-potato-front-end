@@ -26,6 +26,7 @@ class AppContainer extends Component {
       profileDetail: [],
       userId: "",
       history: "",
+      isMounted: false,
 
 
     };
@@ -120,12 +121,15 @@ class AppContainer extends Component {
       .then(json => {
         console.log(json);
         console.log(localStorage.setItem('token', json.access));
-        this.setState({
-          loggedIn: true,
-          username: json.username,
-          userId: json.id,
-          email: json.email,
-        });
+        if (this._isMounted) {
+
+          this.setState({
+            loggedIn: true,
+            username: json.username,
+            userId: json.id,
+            email: json.email,
+          });
+        }
         console.log("is logged in:", this.state.loggedIn);
         if (typeof onSuccess === 'function') {
           onSuccess();
@@ -188,7 +192,9 @@ class AppContainer extends Component {
     // this.checkUserAuthenticated();
 
   }
-
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
 
 
