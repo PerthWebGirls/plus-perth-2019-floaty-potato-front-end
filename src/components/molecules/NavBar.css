@@ -11,12 +11,13 @@
     font-size: 25px;
     
 }
-.NavLogo{
+.NavLogo {
     display: flex;
     align-items: center;
     padding: 5px;
     color: red;
 }
+
 
 .NavMenu{
     display: flex;
@@ -25,7 +26,9 @@
     align-content: center;
     color: red;
     padding-right:5px;
-
-    
 }
-  
+
+.NavLogo img {
+    max-width: 40px;
+    margin-right: 10px;
+}

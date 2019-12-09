@@ -6,10 +6,10 @@ import "./ChangeLayout.css"
 
 const ChangeLayout = () => {
   return (
-    <div className="changeDisplay">
-      <ListView />
-      <GridView />
-      <SortBy />
+    <div className="changeDisplay" >
+      <div className="LayoutIcon"><ListView /></div>
+      <div className="LayoutIcon"><GridView className="LayoutIcon" /></div>
+      <div className="LayoutIcon"><SortBy className="LayoutIcon" /></div>
     </div>
   );
 };

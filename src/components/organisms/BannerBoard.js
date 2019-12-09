@@ -8,15 +8,18 @@ const BannerBoard = ({onSearch}) => {
       <div
         className="BannerImage"
         style={{
-          backgroundImage: `url(/static/banner.jpg)`,
-          backgroundPosition: "center",
+          backgroundImage: `url(/static/popcorn-stripes.jpg)`,
+          backgroundPosition: "top",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat"
         }}
       >
-        <div className="SearchBoard">
+        <div>
+          <img src="/static/popcorn-culture.png" className="big-pop" alt="popcorn" />
+          <div className="SearchBoard">
           <SearchBoard onSearch={onSearch} />
-          <div className="color-divider"></div>
+        </div>
+        <div className="color-divider"></div>
         </div>
       </div>
     </div>
