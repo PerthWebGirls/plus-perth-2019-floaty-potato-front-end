@@ -26,7 +26,6 @@ class AppContainer extends Component {
       profileDetail: [],
       userId: "",
       history: "",
-      isMounted: false,
 
 
     };
@@ -87,7 +86,7 @@ class AppContainer extends Component {
 
   checkUserAuthenticated() {
     if (this.state.loggedIn) {
-      fetch(`${API_URL}/users/`, {
+      fetch(`${API_URL}/users/${this.state.userId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -120,15 +119,22 @@ class AppContainer extends Component {
       .then(json => {
         console.log(json);
         console.log(localStorage.setItem('token', json.access));
-        if (this._isMounted) {
 
-          this.setState({
-            loggedIn: true,
-            username: json.username,
-            userId: json.id,
-            email: json.email,
-          });
+        const token = json.access;
+        let userId = null;
+        try {
+          userId = JSON.parse(atob(token.split('.')[1])).user_id;
+        } catch (e) {
+          console.warn('There was exception while parsing token')
         }
+
+        this.setState({
+          loggedIn: true,
+          username: json.username,
+          // userId: json.id,
+          userId: userId,
+          email: json.email,
+        });
         console.log("is logged in:", this.state.loggedIn);
         if (typeof onSuccess === 'function') {
           onSuccess();
@@ -192,7 +198,6 @@ class AppContainer extends Component {
 
   }
   componentWillUnmount() {
-    this._isMounted = false;
   }
 
 
@@ -200,7 +205,7 @@ class AppContainer extends Component {
   render() {
     return (
       <>
-        <Route path="/" component={() => {
+        <Route path="/" render={() => {
           return (
             <>
               <MainPage
@@ -218,7 +223,7 @@ class AppContainer extends Component {
         }}
           exact
         />
-        <Route path="/Login" component={() => {
+        <Route path="/Login" render={() => {
           return (
             <>
               <LoginPage handleLogin={this.handleLogin} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout}
@@ -229,7 +234,7 @@ class AppContainer extends Component {
         }}
           exact
         />
-        <Route path="/Signup" component={() => {
+        <Route path="/Signup" render={() => {
           return (
             <>
               <SignupPage handle_signup={this.handleSignup} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout}
@@ -246,7 +251,7 @@ class AppContainer extends Component {
 
 
 
-        <Route path="/profile" component={() => {
+        <Route path="/profile" render={() => {
           return (
             <>
               <ProfilePage
