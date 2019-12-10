@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import PageTitles from '../atoms/PageTitles';
 import { Redirect } from 'react-router-dom'
 import "./SignupForm.css"
+import "./LoginForm.css"
+
 class SignupForm extends React.Component {
   state = {
     username: '',
@@ -75,7 +77,7 @@ class SignupForm extends React.Component {
             value={this.state.password}
             onChange={this.handle_change}
           />
-          <input className="button" type="submit" />
+          <input className="form-button" type="submit" />
         </form>
       </>
 
