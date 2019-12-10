@@ -3,7 +3,7 @@ import Button from '../atoms/Button';
 
 const AccountDetail = ({ accountDetail, ...props }) => {
     return (
-        <>
+        <div className="Content-Wrap">
             <div>
                 <h3>Welcome back {accountDetail.user}</h3>
             </div>
@@ -28,7 +28,7 @@ const AccountDetail = ({ accountDetail, ...props }) => {
 
             </div>
             <Button onButtonClick="">Edit</Button>
-        </>
+        </div>
     );
 }
 export default AccountDetail;
