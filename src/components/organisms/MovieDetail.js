@@ -3,6 +3,7 @@ import "./MovieDetail.css"
 import { Link } from "react-router-dom";
 import { withAlert } from 'react-alert'
 import { useAlert } from 'react-alert'
+import Button from "../atoms/Button"
 
 const MovieDetail = ({ movieDetail, ...props }) => {
     const wishList = [];
@@ -40,7 +41,7 @@ const MovieDetail = ({ movieDetail, ...props }) => {
                     </div>
                 ))}
             </div>
-            <button className="WishListButton" onButtonClick={addToList}>Add to watch list</button>
+            <Button onButtonClick={addToList}>Add to watch list</Button>
             <div>
                 <p>{movieDetail.summary}</p>
                 <h5>{movieDetail.duration}</h5>
