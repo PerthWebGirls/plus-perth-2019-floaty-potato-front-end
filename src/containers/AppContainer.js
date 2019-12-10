@@ -96,8 +96,7 @@ class AppContainer extends Component {
         .then(json => {
           this.setState(
             {
-              username: json.username,
-              email: json.email,
+              username: json.username
             }
 
           );
@@ -189,7 +188,7 @@ class AppContainer extends Component {
   componentDidMount() {
     this.fetchApiData();
     this.getProviders();
-    // this.checkUserAuthenticated();
+    this.checkUserAuthenticated();
 
   }
   componentWillUnmount() {

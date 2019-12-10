@@ -3,6 +3,7 @@ import "./MovieDetail.css"
 import { Link } from "react-router-dom";
 import { withAlert } from 'react-alert'
 import { useAlert } from 'react-alert'
+import Button from "../atoms/Button"
 
 const MovieDetail = ({ movieDetail, ...props }) => {
     const wishList = [];
@@ -22,43 +23,43 @@ const MovieDetail = ({ movieDetail, ...props }) => {
     return (
         < div className="Content-Wrap">
             <div className="Cont">
-            <div>
-                <img className="Poster" src={movieDetail.image} alt="" />
-            </div>
-            <div className="Detail-Wrap">
-            <div>
-                <h3>{movieDetail.title}</h3>
-            </div>
-            <div>
-                {(movieDetail.provider || []).map((item, index) => (
-                    <div key={index}>
-                        <ul>
-                            <Link to={item.url}>
-                                <li>{item.name}</li>
-                            </Link>
-                        </ul>
+                <div>
+                    <img className="Poster" src={movieDetail.image} alt="" />
+                </div>
+                <div className="Detail-Wrap">
+                    <div>
+                        <h3>{movieDetail.title}</h3>
                     </div>
-                ))}
-            </div>
-            <button className="WishListButton" onButtonClick={addToList}>Add to watch list</button>
-            <div>
-                <p>{movieDetail.summary}</p>
-                <h5>{movieDetail.duration}</h5>
-                <h5>{movieDetail.release_date}</h5>
-            </div>
-            <div>
-                {(movieDetail.genre || []).map((item, index) => (
-                    <div key={index}>
-                        <ul>
-                            <li>{item.name}</li>
-                        </ul>
+                    <div>
+                        {(movieDetail.provider || []).map((item, index) => (
+                            <div key={index}>
+                                <ul>
+                                    <Link to={item.url}>
+                                        <li>{item.name}</li>
+                                    </Link>
+                                </ul>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
-            <div>
-                {(movieDetail.classification || {}).text}
-            </div>
-            </div>
+                    <button className="WishListButton" onClick={addToList}>Add to watch list</button>
+                    <div>
+                        <p>{movieDetail.summary}</p>
+                        <h5>{movieDetail.duration}</h5>
+                        <h5>{movieDetail.release_date}</h5>
+                    </div>
+                    <div>
+                        {(movieDetail.genre || []).map((item, index) => (
+                            <div key={index}>
+                                <ul>
+                                    <li>{item.name}</li>
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                    <div>
+                        {(movieDetail.classification || {}).text}
+                    </div>
+                </div>
             </div>
         </div>
     );
