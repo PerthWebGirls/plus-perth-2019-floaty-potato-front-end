@@ -1,5 +1,5 @@
 .Content-Wrap{
-    padding-top: 50px;
+    padding-top: 30px;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -17,6 +17,6 @@
 }
 .SubmitButton:hover{
     padding:15px;
-
-
 }
+
+/* Submit button styling located on LoginForm.css */
