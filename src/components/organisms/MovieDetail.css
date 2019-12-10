@@ -13,25 +13,84 @@
     max-width:300px;
 }
 
-.Detail-Wrap{
+.Detail-Wrap {
     margin: 20px;
     display: flex;
     flex-direction: column;
     max-width:500px;
-    
 }
-.WishListButton{
-    align-self: center;
+.Detail-Wrap h3 {
+    margin-bottom: 0px;
+}
+@media(max-width: 842px){
+    .Detail-Wrap h3 {
+        text-align: center;
+    }
+}
+
+.WatchListButtonContainer {
+    display: flex;
+}
+@media(max-width: 842px){
+    .WatchListButtonContainer {
+        justify-content: center;
+    }
+}
+.WatchListButton {
     width: 150px;
-    margin: 10px;
     padding: 10px;
     color: red;
     border: solid red;
     background-color: white;
-
+    transition: 0.5s;
 }
-.WishListButton:hover{
-    padding-top:15px;
-
-
+.WatchListButton:hover {
+    background-color: red;
+    color: white;
+    cursor: pointer;
 }
+
+.MovieDetail {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.MovieDetail p {
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+.MovieDetail h5 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.MovieGenre {
+    display: flex;
+}
+.MovieGenre ul {
+    list-style: none;
+    padding-left: 0px;
+    padding-right: 5px;
+}
+.MovieGenre li {
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.ProviderImage {
+    max-width: 80px;
+}
+.ProviderDetails {
+    display: flex;
+}
+@media(max-width: 842px){
+    .ProviderDetails {
+        justify-content: center;
+    }
+}
+ul.ProviderList {
+    padding-right: 10px;
+    padding-inline-start: 0px;
+    margin-bottom: 20px;
+}
+
