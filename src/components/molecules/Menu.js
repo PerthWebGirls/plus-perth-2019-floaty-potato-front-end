@@ -42,11 +42,11 @@ class Menu extends Component {
                 </TextLink>
               </Link>
             </div>
-            <div className="dropdown-content">
+            {/* <div className="dropdown-content">
               <TextLink linkType="log out" onButtonClick={this.props.onTextLinkClick}>
                 Log out
               </TextLink>
-            </div>
+            </div> */}
           </div>
         )}
       </div>
