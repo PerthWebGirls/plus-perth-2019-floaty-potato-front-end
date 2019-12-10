@@ -4,8 +4,6 @@
     align-items: center;
     width: 45px;
     height: 45px;
-    border: solid 1px red;
-    border-radius: 50%;
 }
 FaUserAlt{
  width: fit-content;
