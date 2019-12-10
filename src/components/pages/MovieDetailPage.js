@@ -29,15 +29,15 @@ class MovieDetailPage extends React.Component {
 
         this.getMovieDetail = this.getMovieDetail.bind(this);
         console.log("props is ", props);
-        const movieIndex = props.match.params.key;
-        this.getMovieDetail(Number(movieIndex) + 1);
+        const movieId = props.match.params.key;
+        this.getMovieDetail(movieId);
 
 
     }
-    getMovieDetail(movieIndex) {
-        console.log("movieIndex", movieIndex)
+    getMovieDetail(movieId) {
+        console.log("movieIndex", movieId)
 
-        return fetch(`${API_URL}/movies/${movieIndex}`)
+        return fetch(`${API_URL}/movies/${movieId}`)
             .then(response => response.json())
             .then(data => {
                 console.log("data", data);
