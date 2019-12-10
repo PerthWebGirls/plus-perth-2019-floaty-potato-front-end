@@ -5,6 +5,7 @@ import MainPage from "../components/pages/MainPage";
 import LoginPage from "../components/pages/LoginPage";
 import SignupPage from "../components/pages/SignupPage";
 import MovieDetailPage from "../components/pages/MovieDetailPage";
+import { useAlert } from 'react-alert';
 import ProfilePage from "../components/pages/ProfilePage"
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -76,11 +77,12 @@ class AppContainer extends Component {
 
   }
 
-  getProfileDetail({ userId }) {
-    fetch(`${API_URL}/profiles/${userId}`)
+  getProfileDetail(userId) {
+    fetch(`${API_URL}/profiles/${userId}/`)
       .then(response => response.json())
-      .then(data => {
-        this.setState({ profileDetail: data.results });
+      .then(response => {
+        this.setState({ profileDetail: response });
+        console.log("this is user profile", this.state.profileDetail);
       })
   }
 
@@ -106,6 +108,46 @@ class AppContainer extends Component {
     }
   }
 
+  handleAddToWishlist = (movieId, userId) => {
+    // const alert = useAlert()
+    console.log('adding movie id to wishlist', movieId);
+    this.getProfileDetail(this.state.userId);
+    console.log(userId);
+    console.log(this.state.profileDetail);
+    const list = this.profileDetail.watchlist;
+
+    // if (!this.profileDetail.watchlist.includes(movieId)) {
+
+    fetch(`${API_URL}/profiles/${userId}/`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({
+        "watchlist": [list.push[movieId]]
+
+        // watchlist: [...this.state.profileDetail.watchlist, movieId]
+      })
+    }).then((res) => {
+      console.log(res.status)
+      if (res.status === 200) {
+        this.setState({
+          profileDetail: {
+            ...this.state.profileDetail,
+            watchlist: [...this.state.profileDetail.watchlist, movieId]
+          }
+        })
+      }
+      else {
+        console.log("oops! something went wrong")
+      }
+    })
+    // } else {
+    //   console.log("Movie already exist in your watch list")
+    // }
+  }
+
   handleLogin = (e, data, onSuccess) => {
     e.preventDefault();
     fetch(`${API_URL}/token/`, {
@@ -127,7 +169,6 @@ class AppContainer extends Component {
         } catch (e) {
           console.warn('There was exception while parsing token')
         }
-
         this.setState({
           loggedIn: true,
           username: json.username,
@@ -135,6 +176,7 @@ class AppContainer extends Component {
           userId: userId,
           email: json.email,
         });
+        console.log(this.state.userId);
         console.log("is logged in:", this.state.loggedIn);
         if (typeof onSuccess === 'function') {
           onSuccess();
@@ -245,12 +287,20 @@ class AppContainer extends Component {
         }}
           exact
         />
-        <Route path="/details/:key" component={MovieDetailPage}
+        <Route path="/details/:key" render={() => {
+          return (
+            <MovieDetailPage
+              profileDetail={this.state.profileDetail}
+              handleLogin={this.handleLogin}
+              handleLogout={this.handleLogout}
+              loggedIn={this.state.loggedIn}
+              handleSignup={this.handleSignup}
+              handleAddToWishlist={this.handleAddToWishlist}>
+            </MovieDetailPage>
+          )
+        }}
           exact
         />
-
-
-
         <Route path="/profile" render={() => {
           return (
             <>

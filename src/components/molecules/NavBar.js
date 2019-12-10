@@ -41,7 +41,6 @@ function NavBar({ loggedIn, handleLogout, onTextLinkClick, onIconClick, ...props
       <div className="NavMenu">
         <Menu onIconClick={onIconClick} />
         <ul>
-
           <li onClick={handleLogout}>logout</li>
         </ul>
       </div>
