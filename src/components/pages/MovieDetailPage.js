@@ -9,7 +9,11 @@ import "./MovieDetailPage.css"
 const API_URL = process.env.REACT_APP_API_URL;
 
 class MovieDetailPage extends React.Component {
-    state = { movieDetail: [] };
+    state = {
+        movieDetail: [],
+        loggedIn: localStorage.getItem('token') ? true : false,
+
+    };
     options = {
         // you can also just use 'bottom center'
         position: positions.TOP_CENTER,
@@ -25,15 +29,15 @@ class MovieDetailPage extends React.Component {
 
         this.getMovieDetail = this.getMovieDetail.bind(this);
         console.log("props is ", props);
-        const movieIndex = props.match.params.key;
-        this.getMovieDetail(Number(movieIndex) + 1);
+        const movieId = props.match.params.key;
+        this.getMovieDetail(movieId);
 
 
     }
-    getMovieDetail(movieIndex) {
-        console.log("movieIndex", movieIndex)
+    getMovieDetail(movieId) {
+        console.log("movieIndex", movieId)
 
-        return fetch(`${API_URL}/movies/${movieIndex}`)
+        return fetch(`${API_URL}/movies/${movieId}`)
             .then(response => response.json())
             .then(data => {
                 console.log("data", data);
@@ -47,11 +51,88 @@ class MovieDetailPage extends React.Component {
             })
 
     }
+    handleLogin = (e, data, onSuccess) => {
+        e.preventDefault();
+        fetch(`${API_URL}/token/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ ...data })
+        })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+                console.log(localStorage.setItem('token', json.access));
+                if (this._isMounted) {
+
+                    this.setState({
+                        loggedIn: true,
+                        username: json.username,
+                        userId: json.id,
+                        email: json.email,
+                    });
+                }
+                console.log("is logged in:", this.state.loggedIn);
+                if (typeof onSuccess === 'function') {
+                    onSuccess();
+                }
+            });
+
+    };
+
+    handleSignup = (e, data, onSuccess, onFailure) => {
+        console.log("user posted  data", data);
+        e.preventDefault();
+        fetch(`${API_URL}/users/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    username: data.username,
+                    password: data.password,
+                    email: data.email,
+                    profile: {}
+                })
+        })
+            .then((res) => {
+                if (res.status >= 400) {
+                    // TODO: refactor tomorrow
+                    res.json().then((err) => onFailure(err));
+                    throw new Error('There was an issue while signing up');
+                }
+                return res.json();
+            })
+            .then(json => {
+                localStorage.setItem('token', json.token);
+                this.setState({
+                    loggedIn: true,
+                    username: json.username,
+                    userId: json.id,
+                    email: json.email,
+                });
+
+                if (typeof onSuccess === 'function') {
+                    onSuccess();
+                }
+            }).catch(() => {
+
+            })
+    };
+
+    handleLogout = () => {
+        console.log('logging out...')
+        localStorage.removeItem('token');
+        this.setState({ loggedIn: false, username: '' });
+    };
+
 
     render() {
         console.log("MovieDetail_2", this.state.movieDetail);
         return (<div className="page-container">
-            <MainTemplate>
+            <MainTemplate loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} handleLogin={this.handleLogin} >
                 <AlertProvider template={AlertTemplate} {...this.options}>
                     <MovieDetail movieDetail={this.state.movieDetail} />
                 </AlertProvider>
