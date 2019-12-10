@@ -42,7 +42,7 @@ const MovieDetail = ({ movieDetail, ...props }) => {
                         ))}
                     </div>
 
-                    <button className="WishListButton" onClick={addToList}>Add to watch list</button>
+                    <Button className="WishListButton" onClick={addToList}>Add to watch list</Button>
                     <div>
                         <p>{movieDetail.summary}</p>
                         <h5>{movieDetail.duration}</h5>
