@@ -1,6 +1,5 @@
 import React from 'react';
 import "./MovieDetail.css"
-import { Link } from "react-router-dom";
 import { withAlert } from 'react-alert'
 // import { useAlert } from 'react-alert'
 
