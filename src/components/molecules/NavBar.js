@@ -32,15 +32,16 @@ function NavBar({ loggedIn, handleLogout, onTextLinkClick, onIconClick, ...props
     <div className="NavBar">
       <Link to="/">
         <div className="NavLogo">
-        <img src="/static/popcorn-culture.png" alt="popcorn" />
+          <img src="/static/popcorn-culture.png" alt="popcorn" />
           <TextLink linkType="Popcornculture" onButtonClick={onTextLinkClick}>
             Popcorn Culture
         </TextLink>
         </div>
       </Link>
       <div className="NavMenu">
-        <Menu onIconClick={onIconClick} />
+      <Menu onIconClick={onIconClick} />
           <a onClick={handleLogout}>logout</a>
+
       </div>
     </div>
   );

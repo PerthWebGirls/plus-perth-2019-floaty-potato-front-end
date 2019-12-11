@@ -5,13 +5,12 @@ import MovieGrid from "../organisms/MovieGrid";
 import "./Mainpage.css"
 import MainTemplate from "../templates/MainTemplate";
 
-const MainPage = ({ handleLogin, loggedIn, handleLogout, movies, providers, onSearch, ...props }) => {
-
+const MainPage = ({ handleLogin, loggedIn, handleLogout, movies, providers, onSearch, filterMovie, ...props }) => {
   return (
     <div className="page-container">
       <MainTemplate handleLogin={handleLogin} loggedIn={loggedIn} handleLogout={handleLogout} >
         <BannerBoard onSearch={onSearch} />
-        <FilterBoard providerList={providers} />
+        <FilterBoard providerList={providers} filterMovie={filterMovie} />
         <MovieGrid movies={movies} />
       </MainTemplate>
 
@@ -19,3 +18,4 @@ const MainPage = ({ handleLogin, loggedIn, handleLogout, movies, providers, onSe
   );
 }
 export default MainPage;
+
