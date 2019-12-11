@@ -6,7 +6,6 @@ import "./Mainpage.css"
 import MainTemplate from "../templates/MainTemplate";
 
 const MainPage = ({ handleLogin, loggedIn, handleLogout, movies, providers, onSearch, ...props }) => {
-
   return (
     <div className="page-container">
       <MainTemplate handleLogin={handleLogin} loggedIn={loggedIn} handleLogout={handleLogout} >
@@ -19,3 +18,4 @@ const MainPage = ({ handleLogin, loggedIn, handleLogout, movies, providers, onSe
   );
 }
 export default MainPage;
+

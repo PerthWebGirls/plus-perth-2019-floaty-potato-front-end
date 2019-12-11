@@ -40,7 +40,6 @@ class MovieDetailPage extends React.Component {
             .then(data => {
                 console.log("data", data);
                 this.setState({ movieDetail: data });
-                console.log("MovieDetail_1", data);
                 return data;
             })
             .catch(err => {
@@ -52,7 +51,7 @@ class MovieDetailPage extends React.Component {
 
 
     render() {
-        console.log("MovieDetail_2", this.state.movieDetail);
+
         return (<div className="page-container">
             <MainTemplate loggedIn={this.props.loggedIn} handleLogout={this.props.handleLogout} handleLogin={this.props.handleLogin}>
                 <AlertProvider template={AlertTemplate} {...this.options}>

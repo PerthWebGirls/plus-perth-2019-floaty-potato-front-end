@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import "./LoginForm.css"
 import PageTitles from '../atoms/PageTitles';
 import { Link, Redirect } from 'react-router-dom';
-import Button from "../atoms/Button";
+// import Button from "../atoms/Button";
 
 class LoginForm extends React.Component {
   state = {

@@ -24,12 +24,11 @@ class AppContainer extends Component {
       loggedIn: localStorage.getItem('token') ? true : false,
       username: '',
       email: '',
+      userId: localStorage.getItem('userId'),
       profileDetail: [],
-      userId: "",
       history: "",
-
-
     };
+    this.getProfileDetail = this.getProfileDetail.bind(this)
   }
 
 
@@ -77,8 +76,8 @@ class AppContainer extends Component {
 
   }
 
-  getProfileDetail(userId) {
-    fetch(`${API_URL}/profiles/${userId}/`)
+  getProfileDetail(id) {
+    fetch(`${API_URL}/profiles/${id}/`)
       .then(response => response.json())
       .then(response => {
         this.setState({ profileDetail: response });
@@ -88,7 +87,7 @@ class AppContainer extends Component {
 
   checkUserAuthenticated() {
     if (this.state.loggedIn) {
-      fetch(`${API_URL}/users/${this.state.userId}`, {
+      fetch(`${API_URL}/users/${this.state.userId}/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -108,26 +107,25 @@ class AppContainer extends Component {
     }
   }
 
-  handleAddToWishlist = (movieId, userId) => {
+  handleAddToWishlist = async (movieId) => {
     // const alert = useAlert()
     console.log('adding movie id to wishlist', movieId);
+    console.log("userId is :", this.state.userId);
     this.getProfileDetail(this.state.userId);
-    console.log(userId);
     console.log(this.state.profileDetail);
-    const list = this.profileDetail.watchlist;
-
-    // if (!this.profileDetail.watchlist.includes(movieId)) {
-
-    fetch(`${API_URL}/profiles/${userId}/`, {
+    let list = this.state.profileDetail.watchlist;
+    console.log(list);
+    // let newList = list.push(movieId);
+    // if (!list.includes(movieId)) {
+    fetch(`${API_URL}/profiles/${this.state.userId}/`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`
       },
-      body: JSON.stringify({
-        "watchlist": [list.push[movieId]]
 
-        // watchlist: [...this.state.profileDetail.watchlist, movieId]
+      body: JSON.stringify({
+        watchlist: [...list, movieId]
       })
     }).then((res) => {
       console.log(res.status)
@@ -163,9 +161,11 @@ class AppContainer extends Component {
         console.log(localStorage.setItem('token', json.access));
 
         const token = json.access;
+        console.log(token);
         let userId = null;
         try {
           userId = JSON.parse(atob(token.split('.')[1])).user_id;
+          localStorage.setItem('userId', userId)
         } catch (e) {
           console.warn('There was exception while parsing token')
         }
@@ -173,7 +173,7 @@ class AppContainer extends Component {
           loggedIn: true,
           username: json.username,
           // userId: json.id,
-          userId: userId,
+          // userId: userId,
           email: json.email,
         });
         console.log(this.state.userId);
@@ -229,6 +229,7 @@ class AppContainer extends Component {
   handleLogout = () => {
     console.log('logging out...')
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
     this.setState({ loggedIn: false, username: '' });
   };
 
@@ -240,8 +241,10 @@ class AppContainer extends Component {
 
   }
   componentWillUnmount() {
-  }
+    // Remember state for the next mount
 
+
+  }
 
 
   render() {
@@ -305,7 +308,7 @@ class AppContainer extends Component {
           return (
             <>
               <ProfilePage
-                profileDetail={this.state.profileDetail}
+                profileDetail={this.getProfileDetail(this.state.userId)} //this need to be checked 
                 loggedIn={this.state.loggedIn}
                 handleLogout={this.handleLogout}
 
