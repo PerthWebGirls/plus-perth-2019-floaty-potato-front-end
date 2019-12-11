@@ -39,10 +39,10 @@ function NavBar({ loggedIn, handleLogout, onTextLinkClick, onIconClick, ...props
         </div>
       </Link>
       <div className="NavMenu">
-        <Menu onIconClick={onIconClick} />
         <ul>
           <li onClick={handleLogout}>logout</li>
         </ul>
+
       </div>
     </div>
   );

@@ -29,7 +29,28 @@ h4 {
 }
 .SubmitButton:hover{
     padding:15px;
-
-
 }
 
+/* This is the code for the submit form too */
+.form-button {
+    color: white;
+    background-color: red;
+    padding: 15px 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 30px;
+    border: none;
+    transition: 0.5s;
+}
+.form-button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.Input {
+    border-radius: 30px;
+    border: solid 1px #dedede;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}

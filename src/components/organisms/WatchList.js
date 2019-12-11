@@ -20,6 +20,5 @@
 //             </Link>
 //         </>
 //     )
-
 // }
 // export default WatchList;

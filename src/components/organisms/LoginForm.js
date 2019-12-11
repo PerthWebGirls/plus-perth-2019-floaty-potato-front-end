@@ -67,7 +67,7 @@ class LoginForm extends React.Component {
             value={this.state.password}
             onChange={this.handle_change}
           />
-          <input className="button" type="submit" />
+          <input className="form-button" type="submit" />
 
           <div><span>Don't you have any account? <Link to="/Signup">Join here</Link></span></div >
         </form >
