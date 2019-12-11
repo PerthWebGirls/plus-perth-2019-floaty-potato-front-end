@@ -4,11 +4,11 @@ import AccountDetail from '../organisms/AccountDetail';
 import MainTemplate from '../templates/MainTemplate';
 import "./ProfilePage.css"
 
-const ProfilePage = ({ profileDetail, handleLogin, handleLogout, loggedIn, getMovie, ...props }) => {
+const ProfilePage = ({ profileDetail, handleLogin, handleLogout, loggedIn, getMovie, handleRemoveFromWishlist, ...props }) => {
     return (
         <div className="page-container">
             <MainTemplate handleLogin={handleLogin} handleLogout={handleLogout} loggedIn={loggedIn}>
-                <AccountDetail accountDetail={profileDetail} />
+                <AccountDetail accountDetail={profileDetail} handleRemoveFromWishlist={handleRemoveFromWishlist} />
             </MainTemplate>
         </div>
     )

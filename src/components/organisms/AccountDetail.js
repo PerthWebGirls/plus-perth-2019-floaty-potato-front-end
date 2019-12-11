@@ -10,19 +10,19 @@ const AccountDetail = ({ accountDetail, ...props }) => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        console.log('accountdetails is', accountDetail.watchlist); 
+        console.log('accountdetails is', accountDetail.watchlist);
         if (accountDetail.watchlist) {
             console.log('fetching movies with ids: ', accountDetail.watchlist);
-            const promises = accountDetail.watchlist.map((movieId) => 
-                    fetch(`${API_URL}/movies/${movieId}`)
-                    .then(response => response.json() ) 
-                );
+            const promises = accountDetail.watchlist.map((movieId) =>
+                fetch(`${API_URL}/movies/${movieId}`)
+                    .then(response => response.json())
+            );
             Promise.all(promises).then((fetchedMovies) => {
                 console.log('fetched movies: ', fetchedMovies);
                 setMovies(fetchedMovies);
             });
         }
-    }, [API_URL,accountDetail.watchlist]); 
+    }, [API_URL, accountDetail.watchlist]);
     // can you share the console now?
     return (
         <>
@@ -54,32 +54,20 @@ const AccountDetail = ({ accountDetail, ...props }) => {
                 <ul>
 
                     {
-                        movies.map( (movie) => 
-                        <li key={movie.id}>{movie.title}
-                            <Link to={`/details/${movie.id}`}>
+                        movies.map((movie) =>
+                            <li key={movie.id}>{movie.title}
+                                <Link to={`/details/${movie.id}`}>
 
-                            <img src={movie.image} alt="movie thumbnail" />
-                            </Link>
-                        </li>)
-                    }
-
-                    {/* {
-                        Promise.all(accountDetail.watchlist).then(id => {
-                            fetch(`${API_URL}/movies/${id}`)
-                                .then(response => response.json())
-                                .then(data => {
-                                    return data
-                                })
-                        } */}
-
-                            // < Button onButtonClick="" > Remove</Button>
-
+                                    <img src={movie.image} alt="movie thumbnail" />
+                                </Link>
+                                < Button onButtonClick={() => props.handleRemoveFromWishlist(movie.id)} > Remove</Button>
+                            </li>)
                     }
                 </ul>
+                <Link to="/">
+                    <Button>Browse Movies</Button>
+                </Link>
             </div>
-            <Link to="/">
-                <Button>Browse Movies</Button>
-            </Link>
         </>
     );
 }
