@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Route } from 'react-router-dom';
 // import { withRouter } from 'react-router';
 import MainPage from "../components/pages/MainPage";
@@ -10,6 +10,10 @@ import ProfilePage from "../components/pages/ProfilePage"
 const API_URL = process.env.REACT_APP_API_URL;
 
 class AppContainer extends Component {
+
+  "----------"
+  //initialize the states
+  "----------"
   constructor(props) {
     super(props);
     this.state = {
@@ -23,15 +27,16 @@ class AppContainer extends Component {
       loggedIn: localStorage.getItem('token') ? true : false,
       username: '',
       email: '',
+      userId: localStorage.getItem('userId'),
       profileDetail: [],
-      userId: "",
       history: "",
-
-
     };
+    this.getProfileDetail = this.getProfileDetail.bind(this)
   }
 
-
+  "----------"
+  //Gets all movie details to display in home page
+  "----------"
   fetchApiData() {
     fetch(`${API_URL}/movies/`)
       .then(res => res.json())
@@ -44,6 +49,9 @@ class AppContainer extends Component {
       });
   }
 
+  "----------"
+  //Returns all Providers 
+  "----------"
   getProviders() {
     fetch(`${API_URL}/providers/`)
       .then(response => response.json())
@@ -56,7 +64,9 @@ class AppContainer extends Component {
       });
 
   }
-
+  "----------"
+  //Search functionality
+  "----------"
   searchMovie = (searchValue) => {
     this.setState({ loading: true })
     console.log(searchValue)
@@ -76,17 +86,24 @@ class AppContainer extends Component {
 
   }
 
-  getProfileDetail({ userId }) {
-    fetch(`${API_URL}/profiles/${userId}`)
+  "----------"
+  //Get user Profile
+  "----------"
+  getProfileDetail(id) {
+    fetch(`${API_URL}/profiles/${id}/`)
       .then(response => response.json())
-      .then(data => {
-        this.setState({ profileDetail: data.results });
+      .then(response => {
+        this.setState({ profileDetail: response });
       })
+
   }
 
+  "----------"
+  //Chech user Authenticated
+  "----------"
   checkUserAuthenticated() {
     if (this.state.loggedIn) {
-      fetch(`${API_URL}/users/${this.state.userId}`, {
+      fetch(`${API_URL}/users/${this.state.userId}/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -99,13 +116,97 @@ class AppContainer extends Component {
             }
 
           );
-        });
+        })
+        .then(() => {
+          this.getProfileDetail(this.state.userId);
+        })
+
     }
     else {
       this.setState({ errorMessage: "user hasn't logged in yet" })
     }
   }
 
+  "----------"
+  //Add movie to user Profile-watch list
+  "----------"
+  handleAddToWishlist = async (movieId) => {
+    let list = this.state.profileDetail.watchlist;
+    if (!list.includes(movieId)) {
+      fetch(`${API_URL}/profiles/${this.state.userId}/`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+
+        body: JSON.stringify({
+          watchlist: [...list, movieId]
+        })
+      }).then((res) => {
+        console.log(res.status)
+
+        if (res.status < 400) {
+          this.setState({
+            profileDetail: {
+              ...this.state.profileDetail,
+              watchlist: [...this.state.profileDetail.watchlist, movieId]
+            }
+          })
+        }
+        else {
+          console.log("oops! something went wrong")
+        }
+      }).catch(() => {
+        console.warn('show alert here sth went wrong as well')
+      })
+    } else {
+      console.log("Movie already exist in your watch list")
+    }
+  }
+
+  "----------"
+  //Remove Movie from profile watch list
+  "----------"
+  handleRemoveFromWishlist = async (movieId) => {
+    console.log("removed item");
+    let list = this.state.profileDetail.watchlist;
+    if (list) {
+      let newList = list.filter(item => item !== movieId);
+      fetch(`${API_URL}/profiles/${this.state.userId}/`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+
+        body: JSON.stringify({
+          watchlist: [...newList]
+        })
+      }).then((res) => {
+        console.log(res.status)
+        if (res.status < 400) {
+          this.setState({
+            profileDetail: {
+              ...this.state.profileDetail,
+              watchlist: [...newList]
+            }
+          })
+        }
+        else {
+          console.log("oops! something went wrong")
+        }
+      }).catch(() => {
+        console.warn('show alert here sth went wrong as well')
+      })
+    } else {
+      console.log("Movie already exist in your watch list")
+    }
+  }
+
+  "----------"
+  //Login to App
+  "----------"
   handleLogin = (e, data, onSuccess) => {
     e.preventDefault();
     fetch(`${API_URL}/token/`, {
@@ -121,13 +222,14 @@ class AppContainer extends Component {
         console.log(localStorage.setItem('token', json.access));
 
         const token = json.access;
+        console.log(token);
         let userId = null;
         try {
           userId = JSON.parse(atob(token.split('.')[1])).user_id;
+          localStorage.setItem('userId', userId)
         } catch (e) {
           console.warn('There was exception while parsing token')
         }
-
         this.setState({
           loggedIn: true,
           username: json.username,
@@ -135,14 +237,24 @@ class AppContainer extends Component {
           userId: userId,
           email: json.email,
         });
+        console.log(this.state.userId);
         console.log("is logged in:", this.state.loggedIn);
+
+        return userId;
+      }).then((userId) => {
+        this.getProfileDetail(userId)
+      }).then(() => {
         if (typeof onSuccess === 'function') {
           onSuccess();
         }
-      });
+      })
 
   };
 
+
+  "----------"
+  //Sign up 
+  "----------"
   handleSignup = (e, data, onSuccess, onFailure) => {
     console.log("user posted  data", data);
     e.preventDefault();
@@ -184,9 +296,14 @@ class AppContainer extends Component {
       })
   };
 
+
+  "----------"
+  //Log out from App
+  "----------"
   handleLogout = () => {
     console.log('logging out...')
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
     this.setState({ loggedIn: false, username: '' });
   };
 
@@ -198,8 +315,10 @@ class AppContainer extends Component {
 
   }
   componentWillUnmount() {
-  }
+    // Remember state for the next mount
 
+
+  }
 
 
   render() {
@@ -245,12 +364,20 @@ class AppContainer extends Component {
         }}
           exact
         />
-        <Route path="/details/:key" component={MovieDetailPage}
+        <Route path="/details/:key" render={() => {
+          return (
+            <MovieDetailPage
+              profileDetail={this.state.profileDetail}
+              handleLogin={this.handleLogin}
+              handleLogout={this.handleLogout}
+              loggedIn={this.state.loggedIn}
+              handleSignup={this.handleSignup}
+              handleAddToWishlist={this.handleAddToWishlist}>
+            </MovieDetailPage>
+          )
+        }}
           exact
         />
-
-
-
         <Route path="/profile" render={() => {
           return (
             <>
@@ -258,7 +385,8 @@ class AppContainer extends Component {
                 profileDetail={this.state.profileDetail}
                 loggedIn={this.state.loggedIn}
                 handleLogout={this.handleLogout}
-
+                handleLogin={this.handleLogin}
+                handleRemoveFromWishlist={this.handleRemoveFromWishlist}
               />
             </>
           );
