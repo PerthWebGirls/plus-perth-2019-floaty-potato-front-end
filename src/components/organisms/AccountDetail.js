@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../atoms/Button';
 import { Link } from "react-router-dom";
-import { promised } from 'q';
+// import { promised } from 'q';
 
 
 const AccountDetail = ({ accountDetail, ...props }) => {
@@ -25,9 +25,9 @@ const AccountDetail = ({ accountDetail, ...props }) => {
     }, [API_URL, accountDetail.watchlist]);
     // can you share the console now?
     return (
-        <>
+        <div className="Content-Wrap">
             <div>
-                <h3>Welcome back {accountDetail.user}</h3>
+                <h3>Welcome back "{accountDetail.user}"</h3>
             </div>
             <div>
                 <img src={accountDetail.avatar} alt={accountDetail.user} />
@@ -57,7 +57,6 @@ const AccountDetail = ({ accountDetail, ...props }) => {
                         movies.map((movie) =>
                             <li key={movie.id}>{movie.title}
                                 <Link to={`/details/${movie.id}`}>
-
                                     <img src={movie.image} alt="movie thumbnail" />
                                 </Link>
                                 < Button onButtonClick={() => props.handleRemoveFromWishlist(movie.id)} > Remove</Button>
@@ -68,7 +67,7 @@ const AccountDetail = ({ accountDetail, ...props }) => {
                     <Button>Browse Movies</Button>
                 </Link>
             </div>
-        </>
+        </div>
     );
 }
 export default AccountDetail;

@@ -27,27 +27,28 @@ const MovieDetail = ({ movieDetail, profileDetail, ...props }) => {
                 </div>
                 <div className="Detail-Wrap">
                     <div>
-                        <h3>{movieDetail.title}</h3>
+                        <h3>{movieDetail.title} ({(movieDetail.classification || {}).text})</h3>
                     </div>
-                    <div>
+                    <div className="ProviderDetails">
                         {(movieDetail.provider || []).map((item, index) => (
                             <div key={index}>
-                                <ul>
-                                    <Link to={item.url}>
-                                        <li>{item.name}</li>
-                                    </Link>
+                                <ul className="ProviderList">
+                                    <a href={item.url} target="blank">{item.name}</a>
                                 </ul>
                             </div>
                         ))}
                     </div>
+                    <div className="WatchListButtonContainer">
 
-                    <button className="WishListButton" onClick={() => props.handleAddToWishlist(movieDetail.id)}>Add to watch list</button>
-                    <div>
-                        <p>{movieDetail.summary}</p>
-                        <h5>{movieDetail.duration}</h5>
-                        <h5>{movieDetail.release_date}</h5>
+                        <button className="WatchListButton" onClick={() => props.handleAddToWishlist(movieDetail.id)}>Add to watch list</button>
                     </div>
-                    <div>
+
+                    <div className="MovieDetail">
+                        <p>{movieDetail.summary}</p>
+                        <h5>DURATION: {movieDetail.duration}</h5>
+                        <h5>RELEASE: {movieDetail.release_date}</h5>
+                    </div>
+                    <div className="MovieGenre">
                         {(movieDetail.genre || []).map((item, index) => (
                             <div key={index}>
                                 <ul>
@@ -55,9 +56,6 @@ const MovieDetail = ({ movieDetail, profileDetail, ...props }) => {
                                 </ul>
                             </div>
                         ))}
-                    </div>
-                    <div>
-                        {(movieDetail.classification || {}).text}
                     </div>
                 </div>
             </div>
