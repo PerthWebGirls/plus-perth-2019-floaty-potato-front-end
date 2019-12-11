@@ -81,8 +81,8 @@ class AppContainer extends Component {
       .then(response => response.json())
       .then(response => {
         this.setState({ profileDetail: response });
-        console.log("this is user profile", this.state.profileDetail);
       })
+
   }
 
   checkUserAuthenticated() {
@@ -100,7 +100,11 @@ class AppContainer extends Component {
             }
 
           );
-        });
+        })
+        .then(() => {
+          this.getProfileDetail(this.state.userId);
+        })
+
     }
     else {
       this.setState({ errorMessage: "user hasn't logged in yet" })
@@ -111,11 +115,10 @@ class AppContainer extends Component {
     // const alert = useAlert()
     console.log('adding movie id to wishlist', movieId);
     console.log("userId is :", this.state.userId);
-    this.getProfileDetail(this.state.userId);
+    // this.getProfileDetail(this.state.userId);
     console.log(this.state.profileDetail);
     let list = this.state.profileDetail.watchlist;
     console.log(list);
-    // let newList = list.push(movieId);
     // if (!list.includes(movieId)) {
     fetch(`${API_URL}/profiles/${this.state.userId}/`, {
       method: 'PUT',
@@ -129,7 +132,8 @@ class AppContainer extends Component {
       })
     }).then((res) => {
       console.log(res.status)
-      if (res.status === 200) {
+
+      if (res.status < 400) {
         this.setState({
           profileDetail: {
             ...this.state.profileDetail,
@@ -138,8 +142,10 @@ class AppContainer extends Component {
         })
       }
       else {
-        console.log("oops! something went wrong")
+        console.log("oops! something went wrong") // that's for getting response from server, but not 200
       }
+    }).catch(() => {
+      console.warn('show alert here sth went wrong as well') // that's for network issues
     })
     // } else {
     //   console.log("Movie already exist in your watch list")
@@ -173,15 +179,20 @@ class AppContainer extends Component {
           loggedIn: true,
           username: json.username,
           // userId: json.id,
-          // userId: userId,
+          userId: userId,
           email: json.email,
         });
         console.log(this.state.userId);
         console.log("is logged in:", this.state.loggedIn);
+
+        return userId;
+      }).then((userId) => {
+        this.getProfileDetail(userId)
+      }).then(() => {
         if (typeof onSuccess === 'function') {
           onSuccess();
         }
-      });
+      })
 
   };
 
@@ -308,10 +319,10 @@ class AppContainer extends Component {
           return (
             <>
               <ProfilePage
-                profileDetail={this.getProfileDetail(this.state.userId)} //this need to be checked 
+                profileDetail={this.state.profileDetail}
                 loggedIn={this.state.loggedIn}
                 handleLogout={this.handleLogout}
-
+                handleLogin={this.handleLogin}
               />
             </>
           );

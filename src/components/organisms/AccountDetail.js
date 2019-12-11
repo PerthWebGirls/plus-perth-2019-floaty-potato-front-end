@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../atoms/Button';
 import { Link } from "react-router-dom";
+import { promised } from 'q';
+
 
 const AccountDetail = ({ accountDetail, ...props }) => {
+    const API_URL = process.env.REACT_APP_API_URL;
+
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        console.log('accountdetails is', accountDetail.watchlist); 
+        if (accountDetail.watchlist) {
+            console.log('fetching movies with ids: ', accountDetail.watchlist);
+            const promises = accountDetail.watchlist.map((movieId) => 
+                    fetch(`${API_URL}/movies/${movieId}`)
+                    .then(response => response.json() ) 
+                );
+            Promise.all(promises).then((fetchedMovies) => {
+                console.log('fetched movies: ', fetchedMovies);
+                setMovies(fetchedMovies);
+            });
+        }
+    }, [API_URL,accountDetail.watchlist]); 
+    // can you share the console now?
     return (
         <>
             <div>
@@ -31,12 +52,29 @@ const AccountDetail = ({ accountDetail, ...props }) => {
             <Button onButtonClick="">Edit</Button>
             <div>
                 <ul>
-                    {this.props.accountDetail.watchlist || [].map((item, index) => (
-                        <li key={index}>{item}
-                            <Button onButtonClick="">Remove</Button>
-                        </li>
-                    ))}
 
+                    {
+                        movies.map( (movie) => 
+                        <li key={movie.id}>{movie.title}
+                            <Link to={`/details/${movie.id}`}>
+
+                            <img src={movie.image} alt="movie thumbnail" />
+                            </Link>
+                        </li>)
+                    }
+
+                    {/* {
+                        Promise.all(accountDetail.watchlist).then(id => {
+                            fetch(`${API_URL}/movies/${id}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    return data
+                                })
+                        } */}
+
+                            // < Button onButtonClick="" > Remove</Button>
+
+                    }
                 </ul>
             </div>
             <Link to="/">
