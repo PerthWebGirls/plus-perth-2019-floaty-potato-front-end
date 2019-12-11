@@ -23,7 +23,6 @@ const AccountDetail = ({ accountDetail, ...props }) => {
             });
         }
     }, [API_URL, accountDetail.watchlist]);
-    // can you share the console now?
     return (
         <div className="Content-Wrap">
             <div>

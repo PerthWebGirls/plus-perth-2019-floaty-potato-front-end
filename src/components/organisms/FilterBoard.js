@@ -4,7 +4,7 @@ import ChangeLayout from "../molecules/ChangeLayout";
 import ClearFilter from "../atoms/ClearFilter";
 import "./FilterBoard.css"
 
-export default function FilterBoard({ providerList, ...props }) {
+export default function FilterBoard({ providerList, filterMovie, ...props }) {
   return (
     <>
       <hr className="RedDivider" />

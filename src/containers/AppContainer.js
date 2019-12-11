@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { Route } from 'react-router-dom';
 // import { withRouter } from 'react-router';
 import MainPage from "../components/pages/MainPage";
@@ -6,7 +6,8 @@ import LoginPage from "../components/pages/LoginPage";
 import SignupPage from "../components/pages/SignupPage";
 import MovieDetailPage from "../components/pages/MovieDetailPage";
 import ProfilePage from "../components/pages/ProfilePage"
-
+import { withAlert } from 'react-alert'
+import { useAlert } from 'react-alert'
 const API_URL = process.env.REACT_APP_API_URL;
 
 class AppContainer extends Component {
@@ -30,6 +31,7 @@ class AppContainer extends Component {
       userId: localStorage.getItem('userId'),
       profileDetail: [],
       history: "",
+      alert: ""
     };
     this.getProfileDetail = this.getProfileDetail.bind(this)
   }
@@ -85,6 +87,30 @@ class AppContainer extends Component {
       });
 
   }
+  "----------"
+  //Filter by Provider id
+  "----------"
+  filterMovie = (providerId) => {
+    this.setState({ loading: true })
+    console.log(providerId)
+    fetch(`${API_URL}/movies/?provider=${providerId}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ movies: data.results });
+        this.setState({ loading: false });
+        console.log('resp', data)
+      })
+      .catch(err => {
+        console.log('error was', err.message);
+        this.setState({ movies: [] });
+        this.setState({ errorMessage: err.message });
+        this.setState({ loading: false });
+      });
+
+  }
+
+
+
 
   "----------"
   //Get user Profile
@@ -112,7 +138,7 @@ class AppContainer extends Component {
         .then(json => {
           this.setState(
             {
-              username: json.username
+              username: json.user
             }
 
           );
@@ -130,38 +156,43 @@ class AppContainer extends Component {
   "----------"
   //Add movie to user Profile-watch list
   "----------"
+
   handleAddToWishlist = async (movieId) => {
-    let list = this.state.profileDetail.watchlist;
-    if (!list.includes(movieId)) {
-      fetch(`${API_URL}/profiles/${this.state.userId}/`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        },
+    // const alert = useAlert()
+    if (this.state.loggedIn) {
+      let list = this.state.profileDetail.watchlist;
+      if (!list.includes(movieId)) {
+        fetch(`${API_URL}/profiles/${this.state.userId}/`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          },
 
-        body: JSON.stringify({
-          watchlist: [...list, movieId]
-        })
-      }).then((res) => {
-        console.log(res.status)
-
-        if (res.status < 400) {
-          this.setState({
-            profileDetail: {
-              ...this.state.profileDetail,
-              watchlist: [...this.state.profileDetail.watchlist, movieId]
-            }
+          body: JSON.stringify({
+            watchlist: [...list, movieId]
           })
-        }
-        else {
-          console.log("oops! something went wrong")
-        }
-      }).catch(() => {
-        console.warn('show alert here sth went wrong as well')
-      })
+        }).then((res) => {
+          console.log(res.status)
+          if (res.status < 400) {
+            this.setState({
+              profileDetail: {
+                ...this.state.profileDetail,
+                watchlist: [...list, movieId]
+              }
+            })
+          }
+          else {
+            alert("oops! something went wrong")
+          }
+        }).catch(() => {
+          alert('show alert here sth went wrong as well')
+        })
+      } else {
+        alert("Movie already exist in your watch list")
+      }
     } else {
-      console.log("Movie already exist in your watch list")
+      alert("you need to login/sign up first");
     }
   }
 
@@ -169,38 +200,40 @@ class AppContainer extends Component {
   //Remove Movie from profile watch list
   "----------"
   handleRemoveFromWishlist = async (movieId) => {
-    console.log("removed item");
-    let list = this.state.profileDetail.watchlist;
-    if (list) {
-      let newList = list.filter(item => item !== movieId);
-      fetch(`${API_URL}/profiles/${this.state.userId}/`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        },
+    const alert = useAlert();
+    if (this.state.loggedIn) {
+      let list = this.state.profileDetail.watchlist;
+      if (list) {
+        let newList = list.filter(item => item !== movieId);
+        fetch(`${API_URL}/profiles/${this.state.userId}/`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          },
 
-        body: JSON.stringify({
-          watchlist: [...newList]
-        })
-      }).then((res) => {
-        console.log(res.status)
-        if (res.status < 400) {
-          this.setState({
-            profileDetail: {
-              ...this.state.profileDetail,
-              watchlist: [...newList]
-            }
+          body: JSON.stringify({
+            watchlist: [...newList]
           })
-        }
-        else {
-          console.log("oops! something went wrong")
-        }
-      }).catch(() => {
-        console.warn('show alert here sth went wrong as well')
-      })
-    } else {
-      console.log("Movie already exist in your watch list")
+        }).then((res) => {
+          console.log(res.status)
+          if (res.status < 400) {
+            this.setState({
+              profileDetail: {
+                ...this.state.profileDetail,
+                watchlist: [...newList]
+              }
+            })
+          }
+          else {
+            alert("oops! something went wrong")
+          }
+        }).catch(() => {
+          alert('oops!!! something went wrong')
+        })
+      } else {
+        alert("You don't have any movie in your list")
+      }
     }
   }
 
@@ -218,9 +251,7 @@ class AppContainer extends Component {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         console.log(localStorage.setItem('token', json.access));
-
         const token = json.access;
         console.log(token);
         let userId = null;
@@ -232,7 +263,7 @@ class AppContainer extends Component {
         }
         this.setState({
           loggedIn: true,
-          username: json.username,
+          username: json.user,
           // userId: json.id,
           userId: userId,
           email: json.email,
@@ -282,14 +313,15 @@ class AppContainer extends Component {
       .then(json => {
         localStorage.setItem('token', json.token);
         this.setState({
-          loggedIn: true,
-          username: json.username,
+          loggedIn: false,
+          username: json.user,
           userId: json.id,
           email: json.email,
         });
 
         if (typeof onSuccess === 'function') {
           onSuccess();
+          alert("please check your email to activate your account.")
         }
       }).catch(() => {
 
@@ -334,6 +366,7 @@ class AppContainer extends Component {
                 loggedIn={this.state.loggedIn}
                 handleLogin={this.handleLogin}
                 handleLogout={this.handleLogout}
+                filterMovie={this.filterMovie}
 
               />
               <div style={{ color: 'red' }}>{this.state.errorMessage}</div>
@@ -372,7 +405,9 @@ class AppContainer extends Component {
               handleLogout={this.handleLogout}
               loggedIn={this.state.loggedIn}
               handleSignup={this.handleSignup}
-              handleAddToWishlist={this.handleAddToWishlist}>
+              handleAddToWishlist={this.handleAddToWishlist}
+
+            >
             </MovieDetailPage>
           )
         }}
@@ -393,13 +428,9 @@ class AppContainer extends Component {
         }}
           exact
         />
-
-
-
-
       </>
     );
   }
 }
 
-export default AppContainer;
+export default withAlert()(AppContainer);
