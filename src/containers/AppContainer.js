@@ -200,7 +200,7 @@ class AppContainer extends Component {
   //Remove Movie from profile watch list
   "----------"
   handleRemoveFromWishlist = async (movieId) => {
-    const alert = useAlert();
+    // const alert = useAlert();
     if (this.state.loggedIn) {
       let list = this.state.profileDetail.watchlist;
       if (list) {
