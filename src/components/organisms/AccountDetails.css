@@ -1,0 +1,28 @@
+.Content-Wrap{
+    padding-top: 50px;
+    display: flex;
+    /* flex-direction: row; */
+    /* align-items: center; */
+    height: 100%;
+    padding-bottom: 50px;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.Avatar{
+    height: auto;
+    justify-content: center;
+    display: flex;
+    max-width: 300px;
+    width:100%;
+}
+
+.Poster{
+    height: auto;
+    justify-content: center;
+    display: flex;
+    max-width: 300px;
+    width:100%;
+}
+
+

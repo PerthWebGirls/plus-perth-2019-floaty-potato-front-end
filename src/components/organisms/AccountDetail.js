@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../atoms/Button';
 import { Link } from "react-router-dom";
+import "./AccountDetails.css"
 // import { promised } from 'q';
 
 
@@ -28,7 +29,7 @@ const AccountDetail = ({ accountDetail, ...props }) => {
             <div>
                 <h3>Welcome back "{accountDetail.user}"</h3>
             </div>
-            <div>
+            <div className="Avatar">
                 <img src={accountDetail.avatar} alt={accountDetail.user} />
             </div>
             <div>
@@ -56,7 +57,7 @@ const AccountDetail = ({ accountDetail, ...props }) => {
                         movies.map((movie) =>
                             <li key={movie.id}>{movie.title}
                                 <Link to={`/details/${movie.id}`}>
-                                    <img src={movie.image} alt="movie thumbnail" />
+                                    <img className="Poster" src={movie.image} alt="movie thumbnail" />
                                 </Link>
                                 < Button onButtonClick={() => props.handleRemoveFromWishlist(movie.id)} > Remove</Button>
                             </li>)
