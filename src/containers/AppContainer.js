@@ -96,6 +96,8 @@ class AppContainer extends Component {
     fetch(`${API_URL}/movies/?provider=${providerId}`)
       .then(response => response.json())
       .then(data => {
+
+
         this.setState({ movies: data.results });
         this.setState({ loading: false });
         console.log('resp', data)
